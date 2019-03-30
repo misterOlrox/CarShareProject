@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 @Stateless
 @LocalBean
-public class AuthenticationManager {
+public class AuthorizationManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
