@@ -1,5 +1,6 @@
 package com.olrox.authorization;
 
+import com.olrox.authorization.domain.Role;
 import com.olrox.authorization.ejb.AuthorizationManager;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class AuthorizationBean implements Serializable {
-    private boolean loggedIn;
+    private Role role;
 
     private String login;
     private String password;
@@ -23,12 +24,12 @@ public class AuthorizationBean implements Serializable {
     @EJB
     private AuthorizationManager authorizationManager;
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public Role getRole() {
+        return role;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getLogin() {
@@ -57,13 +58,13 @@ public class AuthorizationBean implements Serializable {
 
     public void doLogin(){
         if(StringUtils.isEmpty(login) || StringUtils.isEmpty(password)){
-            loggedIn = false;
+            role = null;
             return;
         }
 
-        loggedIn = authorizationManager.login(login, password);
+        role = authorizationManager.login(login, password);
 
-        if(loggedIn){
+        if(role != null){
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
             } catch (IOException e) {
