@@ -7,7 +7,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>com.olrox</groupId>
     <artifactId>logic</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>ejb</packaging>
@@ -25,6 +24,11 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
         </dependency>
     </dependencies>
 
