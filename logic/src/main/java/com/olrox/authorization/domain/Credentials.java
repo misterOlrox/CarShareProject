@@ -12,7 +12,7 @@ public class Credentials {
     private String password;
 
     @OneToOne(mappedBy = "credentials")
-    private Client client;
+    private RentalUser rentalUser;
 
     public String getLogin() {
         return login;
@@ -30,11 +30,11 @@ public class Credentials {
         this.password = password;
     }
 
-    public Client getClient() {
-        return client;
+    public RentalUser getRentalUser() {
+        return rentalUser;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setRentalUser(RentalUser rentalUser) {
+        this.rentalUser = rentalUser;
     }
 }

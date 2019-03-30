@@ -1,14 +1,17 @@
 package com.olrox.authorization.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Client {
+public class RentalUser {
     @Id
     private long id;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     private String name;

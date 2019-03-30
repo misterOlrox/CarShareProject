@@ -2,7 +2,7 @@ package com.olrox.authorization.ejb;
 
 
 import com.olrox.authorization.domain.Credentials;
-import com.olrox.authorization.domain.Client;
+import com.olrox.authorization.domain.RentalUser;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.LocalBean;
@@ -30,8 +30,8 @@ public class AuthenticationManager {
             return false;
         }
 
-        Client client = credentials.getClient();
-        if(client == null){
+        RentalUser rentalUser = credentials.getRentalUser();
+        if(rentalUser == null){
             return false;
         }
 
