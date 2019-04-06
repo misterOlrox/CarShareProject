@@ -10,24 +10,32 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
     <title>Login</title>
 </h:head>
 
-<h:body>
-    <p:dialog header="Введите учетные данные" widgetVar="dig" modal="true" closable="false" visible="true">
-        <h:form>
-            <h:panelGrid>
-                <h:outputText value="Login" />
-                <p:inputText value="#{authorizationBean.login}" />
-                <h:outputText value="Пароль" />
-                <p:inputText value="#{authorizationBean.password}" />
-                <p:commandButton value="Вход" action="#{authorizationBean.doLogin()}" />
-            </h:panelGrid>
-        </h:form>
-    </p:dialog>
-</h:body>
+<h:form>
+    <p:panel header="Login">
 
+        <h:panelGrid id="grid" columns="3" cellpadding="5">
+            <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>
+            <p:inputText id="name" value="#{authorizationBean.login}" required="true" label="Username"/>
+            <p:message for="name" />
+
+            <h:outputLabel for="password" value="Password:" style="font-weight:bold"/>
+            <p:password id="password" label="Password" value="#{authorizationBean.password}" required="true"/>
+            <p:message for="password" />
+
+            <p:commandButton value="Sign in" update="grid"
+                             validateClient="true" style="margin-right:10px" action="#{authorizationBean.doLogin()}"/>
+        </h:panelGrid>
+    </p:panel>
+</h:form>
 </html>

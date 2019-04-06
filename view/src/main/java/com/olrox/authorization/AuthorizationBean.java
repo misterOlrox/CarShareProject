@@ -66,7 +66,12 @@ public class AuthorizationBean implements Serializable {
 
         if(role != null){
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
+                if (requestedPage == null){
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("user/hello-for-user.xhtml");
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
