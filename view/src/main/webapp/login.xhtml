@@ -23,6 +23,9 @@
 
 <h:form>
     <p:panel header="Login">
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
 
         <h:panelGrid id="grid" columns="3" cellpadding="5">
             <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>
