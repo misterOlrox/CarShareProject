@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:p="http://primefaces.org/ui">
+        <h:head>
+            <title>CarRental</title>
+            <h:outputStylesheet name="style.css" library="css"/>
+        </h:head>
+
+        <h:body>
+
+            <div class="layout-wrapper">
+
+                <div class="layout-topbar">
+                    <div class="logo-container">
+                        <a href="#{request.contextPath}/index.xhtml">
+                            <h:graphicImage name="images/car.png"/>
+                        </a>
+                    </div>
+                    <ul class="layout-topbar-menu">
+                        <li><a href="#">A</a>
+                        </li>
+                        <li>
+                            <a href="#">B</a>
+                            <div class="themes-overlay">
+                                <div class="themes-overlay-header">DESIGNER</div>
+                                <a href="https://www.primefaces.org/designer/primefaces">
+                                    <i class="pi pi-images"></i><span>Theme Designer</span></a>
+                            </div>
+
+                        </li>
+                        <li>
+                            <a href="https://www.primefaces.org/support">C</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="layout-content">
+
+                    <div class="content-section content-introduction">
+                        <h1>
+                            <ui:insert name="content-intro"></ui:insert>
+                        </h1>
+                        <p>
+                            <ui:insert name="content-intro-about"></ui:insert>
+                        </p>
+                    </div>
+                    <div class="content-section content-implementation dark-content">
+                        <div style="min-height:500px">
+                            <ui:insert name="content"/>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="ui-g-12 layout-footer">
+                    <div class="ui-g-12 ui-md-6">
+                        © 2019
+                    </div>
+                </div>
+
+            </div>
+            <div class="ui-growl ui-widget" style="z-index: 1004;">
+                <div class="ui-growl-item-container ui-state-highlight ui-corner-all ui-helper-hidden ui-shadow ui-growl-info" aria-live="polite" style="display: block;">
+                    <ui:insert name="growls"/>
+                </div>
+            </div>
+        </h:body>
+</html>

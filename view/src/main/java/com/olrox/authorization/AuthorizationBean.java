@@ -88,6 +88,6 @@ public class AuthorizationBean implements Serializable {
     private static void addError() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Login failed!", "Username or password is incorrect."));
+                "Login failed: Username or password is incorrect.", null));
     }
 }
