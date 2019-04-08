@@ -1,9 +1,9 @@
-package com.olrox.authorization.ejb;
+package com.olrox.login.ejb;
 
 
-import com.olrox.authorization.domain.Credentials;
-import com.olrox.authorization.domain.RentalUser;
-import com.olrox.authorization.domain.Role;
+import com.olrox.login.domain.Credentials;
+import com.olrox.login.domain.RentalUser;
+import com.olrox.login.domain.Role;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.LocalBean;

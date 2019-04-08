@@ -1,7 +1,7 @@
-package com.olrox.authorization;
+package com.olrox.login;
 
-import com.olrox.authorization.domain.Role;
-import com.olrox.authorization.ejb.AuthorizationManager;
+import com.olrox.login.domain.Role;
+import com.olrox.login.ejb.AuthorizationManager;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.EJB;
@@ -11,8 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-
-import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 
 @Named
 @SessionScoped

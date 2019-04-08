@@ -1,4 +1,4 @@
-package com.olrox.authorization.domain;
+package com.olrox.login.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

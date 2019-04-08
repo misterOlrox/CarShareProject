@@ -1,6 +1,7 @@
-package com.olrox.authorization;
+package com.olrox.filter;
 
-import com.olrox.authorization.domain.Role;
+import com.olrox.login.AuthorizationBean;
+import com.olrox.login.domain.Role;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -14,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {UserLoginFilter.USER_FILTER + "*", UserLoginFilter.ADMIN_FILTER + "*"})
+@WebFilter( urlPatterns = {UserLoginFilter.USER_FILTER + "*", UserLoginFilter.ADMIN_FILTER + "*"},
+            filterName = "UserLoginFilter")
 public class UserLoginFilter implements Filter {
     public final static String USER_FILTER = "/user/";
     public final static String ADMIN_FILTER = "/admin/";

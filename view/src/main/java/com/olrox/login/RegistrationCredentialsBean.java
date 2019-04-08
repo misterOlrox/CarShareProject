@@ -1,4 +1,4 @@
-package com.olrox.registration;
+package com.olrox.login;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
