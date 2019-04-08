@@ -83,6 +83,14 @@ public class AuthorizationBean implements Serializable {
 
     }
 
+    public String doLogout(){
+        role = null;
+        login = null;
+        password = null;
+        requestedPage = null;
+        return "/index.xhtml";
+    }
+
     private static void addError() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,

@@ -35,16 +35,23 @@ body a {
     position: absolute;
     right: 0;
     top: 0;
-    margin: 0; }
+    margin: 0;
+    height: 0px;
+    line-height: 0px;
+    display: block;
+    font-size: 24px;
+    color: #ffffff;}
 .layout-wrapper .layout-topbar .layout-topbar-menu li {
     display: inline-block; }
 .layout-wrapper .layout-topbar .layout-topbar-menu li > a {
     padding: 0 28px;
     height: 70px;
-    line-height: 70px;
+    line-height: 35px;
     display: block;
-    font-size: 16px;
-    color: #ffffff; }
+    font-size: 26px;
+    color: #ffffff;
+    background: #30383c;
+    }
 .layout-wrapper .layout-topbar .layout-topbar-menu li .themes-overlay {
     width: 200px;
     max-height: 0;

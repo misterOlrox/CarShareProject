@@ -19,22 +19,30 @@
                             <h:graphicImage name="images/car.png"/>
                         </a>
                     </div>
-                    <ul class="layout-topbar-menu">
-                        <li><a href="#">A</a>
-                        </li>
-                        <li>
-                            <a href="#">B</a>
-                            <div class="themes-overlay">
-                                <div class="themes-overlay-header">DESIGNER</div>
-                                <a href="https://www.primefaces.org/designer/primefaces">
-                                    <i class="pi pi-images"></i><span>Theme Designer</span></a>
-                            </div>
 
-                        </li>
-                        <li>
-                            <a href="https://www.primefaces.org/support">C</a>
-                        </li>
-                    </ul>
+                    <div class="layout-topbar-menu">
+                        <h:form styleClass="ui-noborder" style="border: none">
+                            <p:menubar styleClass="ui-noborder" style="border: none">
+                                <p:submenu label="File" icon="pi pi-file" styleClass="ui-noborder" style="border: none">
+
+                                </p:submenu>
+
+                                <p:submenu label="Edit" icon="pi pi-pencil" rendered="false">
+
+                                </p:submenu>
+
+                                <p:submenu label="Help" icon="pi pi-question">
+
+                                </p:submenu>
+
+                                <p:submenu label="Actions" icon="pi pi-cog">
+
+                                </p:submenu>
+
+                                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
+                            </p:menubar>
+                        </h:form>
+                    </div>
                 </div>
 
 
