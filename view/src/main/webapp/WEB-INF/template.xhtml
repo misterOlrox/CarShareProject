@@ -23,23 +23,10 @@
                     <div class="layout-topbar-menu">
                         <h:form styleClass="ui-noborder" style="border: none">
                             <p:menubar styleClass="ui-noborder" style="border: none">
-                                <p:submenu label="File" icon="pi pi-file" styleClass="ui-noborder" style="border: none">
-
-                                </p:submenu>
-
-                                <p:submenu label="Edit" icon="pi pi-pencil" rendered="false">
-
-                                </p:submenu>
-
-                                <p:submenu label="Help" icon="pi pi-question">
-
-                                </p:submenu>
-
-                                <p:submenu label="Actions" icon="pi pi-cog">
-
-                                </p:submenu>
-
-                                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
+                                <p:menuitem value="#{authorizationBean.login}" url="/view/user/hello-for-user.xhtml"
+                                            icon="pi pi-user" rendered="#{authorizationBean.role !=null }"/>
+                                <p:menuitem value="Log in" url="/view/index.xhtml" icon="pi pi-sign-in" rendered="#{authorizationBean.role == null}"/>
+                                <p:menuitem value="Sign-out" action="#{authorizationBean.doLogout}" icon="pi pi-sign-out" rendered="#{authorizationBean.role != null}"/>
                             </p:menubar>
                         </h:form>
                     </div>
