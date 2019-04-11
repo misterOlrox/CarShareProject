@@ -1,7 +1,7 @@
 package com.olrox.filter;
 
-import com.olrox.login.AuthorizationBean;
-import com.olrox.login.domain.Role;
+import com.olrox.account.AuthorizationBean;
+import com.olrox.account.domain.Role;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -53,7 +53,7 @@ public class UserLoginFilter implements Filter {
 
 
         authorizationBean.setRequestedPage(request.getRequestURI());
-        response.sendRedirect(request.getContextPath() + "/login.xhtml");
+        response.sendRedirect(request.getContextPath() + "/account.xhtml");
     }
 
     @Override

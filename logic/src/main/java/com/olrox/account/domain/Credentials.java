@@ -1,4 +1,4 @@
-package com.olrox.login.domain;
+package com.olrox.account.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,7 +1,7 @@
-package com.olrox.login;
+package com.olrox.account;
 
-import com.olrox.login.domain.Role;
-import com.olrox.login.ejb.AuthorizationManager;
+import com.olrox.account.domain.Role;
+import com.olrox.account.ejb.AuthorizationManager;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.EJB;

@@ -1,6 +1,6 @@
 package com.olrox.filter;
 
-import com.olrox.login.AuthorizationBean;
+import com.olrox.account.AuthorizationBean;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter( urlPatterns = {"/login.xhtml", "/registration.xhtml", "/index.xhtml"},
+@WebFilter( urlPatterns = {"/account.xhtml", "/registration.xhtml", "/index.xhtml"},
             filterName = "LoggedFilter")
 
 public class LoggedFilter implements Filter {
