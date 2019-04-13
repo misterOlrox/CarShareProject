@@ -29,6 +29,7 @@ public class MarkersView implements Serializable {
         simpleModel.addOverlay(new Marker(coord2, "Ataturk Parki"));
         simpleModel.addOverlay(new Marker(coord3, "Karaalioglu Parki"));
         simpleModel.addOverlay(new Marker(coord4, "Kaleici"));*/
+        Marker marker;
     }
 
     public MapModel getSimpleModel() {

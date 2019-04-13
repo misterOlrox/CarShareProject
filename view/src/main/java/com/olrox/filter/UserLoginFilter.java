@@ -53,7 +53,7 @@ public class UserLoginFilter implements Filter {
 
 
         authorizationBean.setRequestedPage(request.getRequestURI());
-        response.sendRedirect(request.getContextPath() + "/account.xhtml");
+        response.sendRedirect(request.getContextPath() + "/login.xhtml");
     }
 
     @Override
