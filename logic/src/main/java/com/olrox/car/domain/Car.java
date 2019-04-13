@@ -3,9 +3,11 @@ package com.olrox.car.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQuery(name = "Car.getAll", query = "SELECT c from Car c")
 public class Car {
     @Id
     private String carNumber;
