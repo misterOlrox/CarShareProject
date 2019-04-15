@@ -1,10 +1,9 @@
 package com.olrox.car.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import com.olrox.order.domain.CarOrder;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQuery(name = "Car.getAll", query = "SELECT c from Car c")
@@ -19,6 +18,9 @@ public class Car {
 
     @OneToOne
     private Coordinates coordinates;
+
+    @OneToMany(mappedBy = "car")
+    private List<CarOrder> orders;
 
     public String getCarNumber() {
         return carNumber;
@@ -50,5 +52,13 @@ public class Car {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public List<CarOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<CarOrder> orders) {
+        this.orders = orders;
     }
 }

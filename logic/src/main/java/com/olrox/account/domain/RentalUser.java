@@ -1,10 +1,9 @@
 package com.olrox.account.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.olrox.order.domain.CarOrder;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class RentalUser {
@@ -22,6 +21,9 @@ public class RentalUser {
     private String email;
 
     private String phoneNumber;
+
+    @OneToMany
+    private List<CarOrder> carOrder;
 
     public long getId() {
         return id;
@@ -69,5 +71,13 @@ public class RentalUser {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<CarOrder> getCarOrder() {
+        return carOrder;
+    }
+
+    public void setCarOrder(List<CarOrder> carOrder) {
+        this.carOrder = carOrder;
     }
 }
