@@ -31,7 +31,7 @@ public class LoggedFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         if(authorizationBean.getRole() != null){
-            response.sendRedirect("user/hello-for-user.xhtml");
+            response.sendRedirect("user/hello.xhtml");
         }
         filterChain.doFilter(servletRequest, servletResponse);
         return;

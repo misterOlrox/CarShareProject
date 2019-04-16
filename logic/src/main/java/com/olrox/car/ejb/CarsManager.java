@@ -2,6 +2,7 @@ package com.olrox.car.ejb;
 
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Coordinates;
+import com.olrox.car.domain.Status;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -24,6 +25,7 @@ public class CarsManager {
         coordinates.setLatitude(lat);
         coordinates.setLongitude(lon);
         car.setCoordinates(coordinates);
+        car.setStatus(Status.FREE);
 
         entityManager.persist(coordinates);
         entityManager.persist(car);

@@ -71,7 +71,7 @@ public class AuthorizationBean implements Serializable {
         else{
             try {
                 if (requestedPage == null){
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("user/hello-for-user.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(role.toString() + "/hello.xhtml");
                 }
                 else{
                     FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
@@ -80,7 +80,6 @@ public class AuthorizationBean implements Serializable {
                 e.printStackTrace();
             }
         }
-
     }
 
     public void doLogout(){

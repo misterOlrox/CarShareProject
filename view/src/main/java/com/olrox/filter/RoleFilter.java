@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter( urlPatterns = {UserLoginFilter.USER_FILTER + "*", UserLoginFilter.ADMIN_FILTER + "*"},
-            filterName = "UserLoginFilter")
-public class UserLoginFilter implements Filter {
+@WebFilter( urlPatterns = {RoleFilter.USER_FILTER + "*", RoleFilter.ADMIN_FILTER + "*"},
+            filterName = "RoleFilter")
+public class RoleFilter implements Filter {
     public final static String USER_FILTER = "/user/";
     public final static String ADMIN_FILTER = "/admin/";
 

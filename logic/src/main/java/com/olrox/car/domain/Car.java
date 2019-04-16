@@ -1,7 +1,7 @@
 package com.olrox.car.domain;
 
 import com.olrox.order.domain.CarOrder;
-import com.olrox.order.domain.Status;
+import com.olrox.car.domain.Status;
 
 import javax.persistence.*;
 import java.util.List;
