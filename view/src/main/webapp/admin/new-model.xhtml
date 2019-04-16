@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content-intro">Model management</ui:define>
+    <ui:define name="content-intro-about">Here you can create new car model or look at existing</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:panel header="New model">
+
+
+                <h:panelGrid id="grid" columns="3" cellpadding="5">
+                    <h:outputLabel for="manufacturer" value="Manufacturer:" style="font-weight:bold"/>
+                    <p:inputText id="manufacturer" value="#{authorizationBean.login}" required="true" label="Username"/>
+
+                    <h:outputLabel for="name" value="Model Name:" style="font-weight:bold"/>
+                    <p:inputText id="name" value="#{authorizationBean.login}" required="true" label="Username"/>
+
+                    <h:outputLabel for="cost" value="Price per minute:" style="font-weight:bold"/>
+                    <p:inputText id="cost" value="#{authorizationBean.login}" required="true" label="Username"/>
+
+                    <h:outputLabel for="image" value="Image:" style="font-weight:bold"/>
+                    <p:inputText id="image" value="#{authorizationBean.login}" required="true" label="Username"/>
+
+
+
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
