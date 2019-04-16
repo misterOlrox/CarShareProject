@@ -1,6 +1,7 @@
 package com.olrox.car.domain;
 
 import com.olrox.order.domain.CarOrder;
+import com.olrox.order.domain.Status;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +10,10 @@ import java.util.List;
 @NamedQuery(name = "Car.getAll", query = "SELECT c from Car c")
 public class Car {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(unique = true)
     private String carNumber;
 
     @ManyToOne
@@ -21,6 +26,9 @@ public class Car {
 
     @OneToMany(mappedBy = "car")
     private List<CarOrder> orders;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public String getCarNumber() {
         return carNumber;
@@ -60,5 +68,21 @@ public class Car {
 
     public void setOrders(List<CarOrder> orders) {
         this.orders = orders;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

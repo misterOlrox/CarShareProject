@@ -1,10 +1,6 @@
 package com.olrox.car.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,7 +13,8 @@ public class CarModel {
 
     private String modelName;
 
-    private String image;
+    @Lob
+    private byte[] image;
 
     private int pricePerMinute;
 
@@ -48,11 +45,11 @@ public class CarModel {
         this.modelName = modelName;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
