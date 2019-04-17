@@ -17,7 +17,7 @@ public class CarsManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Car createCar(String carNumber, double lat, double lon){
+    public Car create(String carNumber, double lat, double lon){
         Car car = new Car();
         car.setCarNumber(carNumber);
         car.setFuel(100);
@@ -33,7 +33,7 @@ public class CarsManager {
         return car;
     }
 
-    public List<Car> getAllCars(){
+    public List<Car> getAll(){
         TypedQuery<Car> namedQuery = entityManager.createNamedQuery("Car.getAll", Car.class);
         return namedQuery.getResultList();
     }

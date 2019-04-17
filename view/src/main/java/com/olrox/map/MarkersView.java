@@ -34,7 +34,7 @@ public class MarkersView implements Serializable {
     public void init() {
         simpleModel = new DefaultMapModel();
 
-        List<Car> cars = carsManager.getAllCars();
+        List<Car> cars = carsManager.getAll();
         for(Car car: cars){
             LatLng coord = new LatLng(  car.getCoordinates().getLatitude(),
                                         car.getCoordinates().getLongitude());
@@ -49,7 +49,7 @@ public class MarkersView implements Serializable {
     public void addMarker() {
         Marker marker = new Marker(new LatLng(lat, lng), title);
         simpleModel.addOverlay(marker);
-        carsManager.createCar(title, lat, lng);
+        carsManager.create(title, lat, lng);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng));
     }
 

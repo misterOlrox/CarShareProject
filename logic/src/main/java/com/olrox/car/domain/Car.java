@@ -1,7 +1,6 @@
 package com.olrox.car.domain;
 
 import com.olrox.order.domain.CarOrder;
-import com.olrox.car.domain.Status;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Car {
     private String carNumber;
 
     @ManyToOne
-    private CarModel carModel;
+    private Model model;
 
     private int fuel;
 
@@ -38,12 +37,12 @@ public class Car {
         this.carNumber = carNumber;
     }
 
-    public CarModel getCarModel() {
-        return carModel;
+    public Model getModel() {
+        return model;
     }
 
-    public void setCarModel(CarModel carModel) {
-        this.carModel = carModel;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public int getFuel() {

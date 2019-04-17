@@ -1,10 +1,18 @@
 package com.olrox.car.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class CarModel {
+@NamedQuery(name = "Model.getAll", query = "SELECT c from Model c")
+public class Model implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -18,7 +26,7 @@ public class CarModel {
 
     private int pricePerMinute;
 
-    @OneToMany(mappedBy = "carModel")
+    @OneToMany(mappedBy = "model")
     private List<Car> car;
 
     public long getId() {
