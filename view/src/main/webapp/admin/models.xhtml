@@ -3,6 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">Model management</ui:define>
@@ -23,6 +24,15 @@
 
                         <h:outputLabel for="cost" value="Price per minute:" style="font-weight:bold"/>
                         <p:inputText id="cost" value="#{modelCollectorView.model.pricePerMinute}" required="true" />
+
+                        <h:outputLabel for="image" value="Image:" style="font-weight:bold"/>
+                        <p:fileUpload id="image"
+                                      value="#{imageUploadBean.file}"
+                                      mode="advanced"
+                                      fileUploadListener="#{imageUploadBean.handleFileUpload}"
+                                      auto="true"
+                        />
+
 
                         <p:row></p:row>
                         <p:row>
@@ -50,6 +60,10 @@
 
                     <p:column headerText="Price per minute">
                         <h:outputText value="#{model.pricePerMinute}" />
+                    </p:column>
+
+                    <p:column headerText="Image" width="150">
+                        <o:graphicImage value="#{modelRenderer.render(model.id)}" width="150"/>
                     </p:column>
 
                     <p:column headerText="Remove">

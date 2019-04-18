@@ -35,6 +35,11 @@ public class ModelsManager {
         entityManager.remove(entityManager.contains(model) ? model : entityManager.merge(model));
     }
 
+    public byte[] getImage(long id){
+        Model model = entityManager.find(Model.class, id);
+        return model.getImage();
+    }
+
     public List<Model> getAll(){
         TypedQuery<Model> namedQuery = entityManager.createNamedQuery("Model.getAll", Model.class);
         return namedQuery.getResultList();

@@ -12,7 +12,10 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class ImageUploadView implements Serializable {
+public class ImageUploadBean implements Serializable {
+    @Inject
+    ModelCollectorView modelCollectorView;
+
     private UploadedFile file;
 
     public UploadedFile getFile() {
@@ -28,9 +31,14 @@ public class ImageUploadView implements Serializable {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        else{
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No image file", null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 
     public void handleFileUpload(FileUploadEvent event) {
+        modelCollectorView.getModel().setImage(event.getFile().getContents());
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

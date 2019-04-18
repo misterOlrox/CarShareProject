@@ -6,6 +6,8 @@ import com.olrox.car.ejb.ModelsManager;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -32,6 +34,10 @@ public class ModelCollectorView implements Serializable {
     }
 
     public String reinit() {
+        if(model.getImage() == null){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No image file", null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
         modelsManager.persist(model);
         model = new Model();
         return null;
