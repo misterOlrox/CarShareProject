@@ -2,6 +2,7 @@ package com.olrox.map;
 
 import com.olrox.car.domain.Car;
 import com.olrox.car.ejb.CarsManager;
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -18,10 +19,12 @@ import java.util.List;
 
 @Named
 @ApplicationScoped
-public class MarkersView implements Serializable {
+public class MapView implements Serializable {
     private MapModel simpleModel;
 
-    private String title;
+    private Marker marker;
+
+    private String carNumber;
 
     private double lat;
 
@@ -47,9 +50,9 @@ public class MarkersView implements Serializable {
     }
 
     public void addMarker() {
-        Marker marker = new Marker(new LatLng(lat, lng), title);
+        Marker marker = new Marker(new LatLng(lat, lng), carNumber);
         simpleModel.addOverlay(marker);
-        carsManager.create(title, lat, lng);
+        carsManager.create(carNumber, lat, lng);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng));
     }
 
@@ -57,12 +60,12 @@ public class MarkersView implements Serializable {
         this.simpleModel = simpleModel;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCarNumber() {
+        return carNumber;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
     }
 
     public double getLat() {
@@ -79,5 +82,17 @@ public class MarkersView implements Serializable {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
+
+    public void onMarkerSelect(OverlaySelectEvent event) {
+        this.marker = (Marker) event.getOverlay();
     }
 }

@@ -3,6 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">Map</ui:define>
@@ -14,8 +15,19 @@
 
 
         <p:panel>
-            <p:gmap center="53.894206, 27.547164" zoom="12"
-                    type="ROADMAP" style="width:100%;height:600px" model="#{markersView.simpleModel}" streetView="true"/>
+            <p:gmap center="53.894206, 27.547164"
+                    zoom="12"
+                    type="ROADMAP"
+                    style="width:100%;height:600px"
+                    model="#{mapView.simpleModel}"
+                    streetView="true">
+
+                <p:ajax event="overlaySelect" listener="#{mapView.onMarkerSelect}" />
+                <p:gmapInfoWindow>
+
+                    <h:outputText value="#{mapView.marker.title}" />
+                </p:gmapInfoWindow>
+            </p:gmap>
         </p:panel>
     </ui:define>
 </ui:composition>

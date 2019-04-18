@@ -13,32 +13,19 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class ImageUploadBean implements Serializable {
-    @Inject
-    ModelCollectorView modelCollectorView;
 
-    private UploadedFile file;
+    private byte[] image;
 
-    public UploadedFile getFile() {
-        return file;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-
-    public void upload() {
-        if(file != null) {
-            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-        else{
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "No image file", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        modelCollectorView.getModel().setImage(event.getFile().getContents());
+        image = event.getFile().getContents();
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

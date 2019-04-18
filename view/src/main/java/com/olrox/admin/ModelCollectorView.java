@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,9 @@ import java.util.List;
 public class ModelCollectorView implements Serializable {
     @EJB
     private ModelsManager modelsManager;
+
+    @Inject
+    ImageUploadBean imageUploadBean;
 
     private Model model;
 
@@ -34,9 +38,13 @@ public class ModelCollectorView implements Serializable {
     }
 
     public String reinit() {
-        if(model.getImage() == null){
+        if(imageUploadBean.getImage() == null){
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No image file", null);
             FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        else{
+            model.setImage(imageUploadBean.getImage());
+            imageUploadBean.setImage(null);
         }
         modelsManager.persist(model);
         model = new Model();

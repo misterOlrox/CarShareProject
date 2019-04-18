@@ -35,9 +35,9 @@
             }
 
             function markerAddComplete() {
-                var title = document.getElementById('title');
-                currentMarker.setTitle(title.value);
-                title.value = "";
+                var carNumber = document.getElementById('carNumber');
+                currentMarker.setTitle(carNumber.value);
+                carNumber.value = "";
 
                 currentMarker = null;
                 PF('dlg').hide();
@@ -56,24 +56,33 @@
 
         <p:panel>
             <p:gmap center="53.894206, 27.547164" zoom="12"
-                    type="ROADMAP" style="width:100%;height:600px" model="#{markersView.simpleModel}" streetView="true"
+                    type="ROADMAP" style="width:100%;height:600px" model="#{mapView.simpleModel}" streetView="true"
                     onPointClick="handlePointClick(event);" widgetVar="map"/>
         </p:panel>
 
         <p:dialog widgetVar="dlg" showEffect="fade" closable="false">
             <h:form prependId="false">
                 <h:panelGrid columns="2">
-                    <h:outputLabel for="title" value="Title:" />
-                    <p:inputText id="title" value="#{markersView.title}" />
+                    <h:outputLabel for="carNumber" value="Car Number:" />
+                    <p:inputText id="carNumber" value="#{mapView.carNumber}" />
+
+                    <h:outputLabel for="carNumber" value="Car Number:" />
+                    <p:inputText id="carNumber1" value="#{mapView.carNumber}" />
+
+                    <h:outputLabel for="carNumber" value="Car Number:" />
+                    <p:inputText id="carNumber2" value="#{mapView.carNumber}" />
+
+                    <h:outputLabel for="carNumber" value="Car Number:" />
+                    <p:inputText id="carNumber3" value="#{mapView.carNumber}" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Add" action="#{markersView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
+                        <p:commandButton value="Add" action="#{mapView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
                         <p:commandButton value="Cancel" onclick="return cancel()" />
                     </f:facet>
                 </h:panelGrid>
 
-                <h:inputHidden id="lat" value="#{markersView.lat}" />
-                <h:inputHidden id="lng" value="#{markersView.lng}" />
+                <h:inputHidden id="lat" value="#{mapView.lat}" />
+                <h:inputHidden id="lng" value="#{mapView.lng}" />
             </h:form>
         </p:dialog>
     </ui:define>

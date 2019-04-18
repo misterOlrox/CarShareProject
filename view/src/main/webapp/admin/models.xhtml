@@ -37,8 +37,17 @@
                         <p:row></p:row>
                         <p:row>
 
-                            <p:commandButton id="btn_add" value="Add" update="models msgs @parent" action="#{modelCollectorView.reinit}" >
-                                <p:collector value="#{modelCollectorView.model}" addTo="#{modelCollectorView.models}" unique="false"/>
+                            <p:commandButton id="btn_add"
+                                             value="Add"
+                                             update="models msgs @parent"
+                                             action="#{modelCollectorView.reinit}"
+                            >
+                                <p:collector
+                                        value="#{modelCollectorView.model}"
+                                        addTo="#{modelCollectorView.models}"
+                                        unique="false"
+
+                                />
                             </p:commandButton>
 
                             <p:commandButton id="btn_reset" value="Reset" type="reset"/>
