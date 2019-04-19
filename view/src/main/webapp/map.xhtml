@@ -22,10 +22,10 @@
                     model="#{mapView.simpleModel}"
                     streetView="true">
 
-                <p:ajax event="overlaySelect" listener="#{mapView.onMarkerSelect}" />
+                <p:ajax event="overlaySelect" listener="#{carBean.onMarkerSelect}" />
                 <p:gmapInfoWindow>
 
-                    <h:outputText value="#{mapView.marker.title}" />
+                    <h:outputText value="#{carBean.marker.title}" />
                 </p:gmapInfoWindow>
             </p:gmap>
         </p:panel>

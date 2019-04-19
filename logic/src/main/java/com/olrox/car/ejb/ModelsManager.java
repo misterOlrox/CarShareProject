@@ -40,6 +40,11 @@ public class ModelsManager {
         return model.getImage();
     }
 
+    public Model getModel(long id){
+        Model model = entityManager.find(Model.class, id);
+        return model;
+    }
+
     public List<Model> getAll(){
         TypedQuery<Model> namedQuery = entityManager.createNamedQuery("Model.getAll", Model.class);
         return namedQuery.getResultList();

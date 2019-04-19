@@ -2,6 +2,7 @@ package com.olrox.car.ejb;
 
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Coordinates;
+import com.olrox.car.domain.Model;
 import com.olrox.car.domain.Status;
 
 import javax.ejb.LocalBean;
@@ -17,7 +18,7 @@ public class CarsManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Car create(String carNumber, double lat, double lon){
+    public Car create(String carNumber, double lat, double lon, Model model){
         Car car = new Car();
         car.setCarNumber(carNumber);
         car.setFuel(100);
@@ -26,6 +27,7 @@ public class CarsManager {
         coordinates.setLongitude(lon);
         car.setCoordinates(coordinates);
         car.setStatus(Status.FREE);
+        car.setModel(model);
 
         entityManager.persist(coordinates);
         entityManager.persist(car);

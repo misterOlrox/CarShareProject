@@ -3,6 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">Admin Map</ui:define>
@@ -64,25 +65,48 @@
             <h:form prependId="false">
                 <h:panelGrid columns="2">
                     <h:outputLabel for="carNumber" value="Car Number:" />
-                    <p:inputText id="carNumber" value="#{mapView.carNumber}" />
+                    <p:inputText id="carNumber" value="#{carBean.carNumber}" required="true"/>
 
-                    <h:outputLabel for="carNumber" value="Car Number:" />
-                    <p:inputText id="carNumber1" value="#{mapView.carNumber}" />
 
-                    <h:outputLabel for="carNumber" value="Car Number:" />
-                    <p:inputText id="carNumber2" value="#{mapView.carNumber}" />
+                    <p:outputLabel for="model" value="Model:" />
+                    <p:selectOneMenu id="model"
+                                     value="#{carBean.model}"
+                                     effect="fade"
+                                     var="m"
+                                     autoWidth="true"
+                                     converter="ModelMenuConverter">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{modelCollectorView.models}"
+                                       var="model"
+                                       itemValue="#{model}"
+                                       itemLabel="#{model.modelName}"/>
 
-                    <h:outputLabel for="carNumber" value="Car Number:" />
-                    <p:inputText id="carNumber3" value="#{mapView.carNumber}" />
+                        <p:column headerText="Manufacturer">
+                            <h:outputText value="#{m.manufacturer}" />
+                        </p:column>
+
+                        <p:column headerText="ModelName">
+                            <h:outputText value="#{m.modelName}" />
+                        </p:column>
+
+                        <p:column headerText="Price per minute">
+                            <h:outputText value="#{m.pricePerMinute}" />
+                        </p:column>
+
+                        <p:column headerText="Image">
+                            <o:graphicImage value="#{modelRenderer.render(m.id)}" width="50"/>
+                        </p:column>
+                    </p:selectOneMenu>
+
 
                     <f:facet name="footer">
-                        <p:commandButton value="Add" action="#{mapView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
+                        <p:commandButton value="Add" action="#{carBean.addNewCar}" update=":messages" oncomplete="markerAddComplete()" />
                         <p:commandButton value="Cancel" onclick="return cancel()" />
                     </f:facet>
                 </h:panelGrid>
 
-                <h:inputHidden id="lat" value="#{mapView.lat}" />
-                <h:inputHidden id="lng" value="#{mapView.lng}" />
+                <h:inputHidden id="lat" value="#{carBean.lat}" />
+                <h:inputHidden id="lng" value="#{carBean.lng}" />
             </h:form>
         </p:dialog>
     </ui:define>
