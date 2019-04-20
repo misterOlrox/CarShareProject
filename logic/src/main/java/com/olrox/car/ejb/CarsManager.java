@@ -18,7 +18,11 @@ public class CarsManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Car create(String carNumber, double lat, double lon, Model model){
+    public Car create(String carNumber, double lat, double lon, Model model) {
+        if(isDuplicate(carNumber)){
+            return null;
+        }
+
         Car car = new Car();
         car.setCarNumber(carNumber);
         car.setFuel(100);
@@ -35,7 +39,17 @@ public class CarsManager {
         return car;
     }
 
-    public List<Car> getAll(){
+    private boolean isDuplicate(String value) {
+        if(entityManager.createQuery("from Car as c where c.carNumber=:value")
+                .setParameter("value", value).getResultList().size()>0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public List<Car> getAll() {
         TypedQuery<Car> namedQuery = entityManager.createNamedQuery("Car.getAll", Car.class);
         return namedQuery.getResultList();
     }

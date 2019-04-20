@@ -1,15 +1,15 @@
 package com.olrox.map;
 
-import com.olrox.admin.ModelCollectorView;
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Model;
 import com.olrox.car.ejb.CarsManager;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.Marker;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class CarBean implements Serializable {
     private Marker marker;
 
@@ -35,17 +35,12 @@ public class CarBean implements Serializable {
 
     private Model model;
 
-    private int modelId;
-
-
-
-
     public String getCarNumber() {
         return carNumber;
     }
 
     public void setCarNumber(String carNumber) {
-        this.carNumber = carNumber;
+        this.carNumber = carNumber.toUpperCase();
     }
 
     public double getLat() {
@@ -72,14 +67,6 @@ public class CarBean implements Serializable {
         this.model = model;
     }
 
-    public int getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(int modelId) {
-        this.modelId = modelId;
-    }
-
     public Marker getMarker() {
         return marker;
     }
@@ -93,12 +80,33 @@ public class CarBean implements Serializable {
     }
 
     public void addNewCar() {
+        if(model==null){
+            addNoModelMessage();
+            return;
+        }
         Car car = carsManager.create(carNumber, lat, lng, model);
+        if(car==null){
+            addDuplicateCarMessage();
+            return;
+        }
         Marker marker = new Marker(new LatLng(lat, lng), carNumber, car.getId());
         mapView.getSimpleModel().addOverlay(marker);
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Marker Added",
-                        "Lat:" + lat + ", Lng:" + lng));
+        addSuccessMessage();
+        PrimeFaces.current().executeScript("PF('dlg').hide();");
+    }
+
+    private void addDuplicateCarMessage(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Duplicate car", "car with number " + carNumber + " already exists."));
+    }
+
+    private void addSuccessMessage(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Car " +carNumber+ " Added", "Lat:" + lat + ", Lng:" + lng));
+    }
+
+    private void addNoModelMessage(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                "Choose car's model", null));
     }
 }
