@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class RentalUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Enumerated(EnumType.STRING)

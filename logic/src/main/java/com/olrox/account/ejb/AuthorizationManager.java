@@ -17,7 +17,7 @@ public class AuthorizationManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Role login(String name, String password){
+    public Role signIn(String name, String password){
         if(StringUtils.isEmpty(name) || StringUtils.isEmpty(password)){
             return null;
         }
@@ -37,5 +37,11 @@ public class AuthorizationManager {
         }
 
         return rentalUser.getRole();
+    }
+
+    public void signUp(Credentials credentials, RentalUser rentalUser){
+        rentalUser.setCredentials(credentials);
+        entityManager.persist(credentials);
+        entityManager.persist(rentalUser);
     }
 }

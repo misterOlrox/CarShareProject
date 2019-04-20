@@ -49,7 +49,7 @@ public class UserFilter implements Filter {
         }
 
         authorizationBean.setRequestedPage(request.getRequestURI());
-        response.sendRedirect(request.getContextPath() + "/login.xhtml");
+        response.sendRedirect(request.getContextPath() + "/signIn.xhtml");
     }
 
     @Override

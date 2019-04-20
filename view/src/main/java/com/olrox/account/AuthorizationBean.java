@@ -63,7 +63,7 @@ public class AuthorizationBean implements Serializable {
             return;
         }
 
-        role = authorizationManager.login(login, password);
+        role = authorizationManager.signIn(login, password);
 
         if(role == null){
             addError();

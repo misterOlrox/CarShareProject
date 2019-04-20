@@ -53,7 +53,36 @@
         <p:panel>
             <p:gmap center="53.894206, 27.547164" zoom="12"
                     type="ROADMAP" style="width:100%;height:600px" model="#{mapView.simpleModel}" streetView="true"
-                    onPointClick="handlePointClick(event);" widgetVar="map"/>
+                    onPointClick="handlePointClick(event);" widgetVar="map">
+
+                <p:ajax event="overlaySelect" listener="#{carSelectBean.onMarkerSelect}" />
+                <p:gmapInfoWindow>
+                    <h:panelGrid id="grid" columns="2" cellpadding="5" style="color: black">
+                        <h:outputLabel for="carNumber1" value="Car Number:" style="font-weight:bold"/>
+                        <h:outputText id="carNumber1" value="#{carSelectBean.car.carNumber}" />
+
+                        <h:outputLabel for="manufacturer1" value="Manufacturer:" style="font-weight:bold"/>
+                        <h:outputText id="manufacturer1" value="#{carSelectBean.car.model.manufacturer}" />
+
+                        <h:outputLabel for="modelName1" value="Model:" style="font-weight:bold"/>
+                        <h:outputText id="modelName1" value="#{carSelectBean.car.model.modelName}" />
+
+                        <h:outputLabel for="price1" value="Price per minute:" style="font-weight:bold"/>
+                        <h:outputText id="price1" value="#{carSelectBean.car.model.pricePerMinute}" />
+
+                        <h:outputLabel for="fuel1" value="Fuel:" style="font-weight:bold"/>
+                        <p:progressBar id="fuel1" value="#{carSelectBean.car.fuel}"
+                                       labelTemplate="{value}%"
+                                       displayOnly="true"/>
+
+                        <h:outputLabel for="image1" value="Image:" style="font-weight:bold"/>
+                        <o:graphicImage id="image1"
+                                        value="#{modelRenderer.render(carSelectBean.car.model.id)}"
+                                        width="100"/>
+                    </h:panelGrid>
+
+                </p:gmapInfoWindow>
+            </p:gmap>
         </p:panel>
 
         <p:dialog widgetVar="dlg" showEffect="fade" closable="false">
