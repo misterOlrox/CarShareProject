@@ -15,11 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter( urlPatterns = {RoleFilter.USER_FILTER + "*", RoleFilter.ADMIN_FILTER + "*"},
-            filterName = "RoleFilter")
-public class RoleFilter implements Filter {
-    public final static String USER_FILTER = "/user/";
-    public final static String ADMIN_FILTER = "/admin/";
+@WebFilter( urlPatterns = AdminFilter.FILTER + "*", filterName = "AdminFilter")
+public class AdminFilter implements Filter {
+    public final static String FILTER = "/admin/";
 
     @Inject
     private AuthorizationBean authorizationBean;
@@ -39,7 +37,7 @@ public class RoleFilter implements Filter {
         if(authorizationBean.getRole() != null){
 
             String uri = request.getRequestURI();
-            String beginOfAdminUri = request.getContextPath() + ADMIN_FILTER;
+            String beginOfAdminUri = request.getContextPath() + FILTER;
 
             if(uri.startsWith(beginOfAdminUri) && authorizationBean.getRole() != Role.ADMIN){
                 response.sendRedirect(request.getContextPath() + "/errors.xhtml");
@@ -49,8 +47,6 @@ public class RoleFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-
-
 
         authorizationBean.setRequestedPage(request.getRequestURI());
         response.sendRedirect(request.getContextPath() + "/login.xhtml");
