@@ -60,12 +60,12 @@
             <h:form prependId="false">
                 <h:panelGrid columns="2">
                     <h:outputLabel for="carNumber" value="Car Number:" />
-                    <p:inputMask id="carNumber" value="#{carBean.carNumber}" required="true" mask="9999 aa-9"/>
+                    <p:inputMask id="carNumber" value="#{newCarBean.carNumber}" required="true" mask="9999 aa-9"/>
 
 
                     <p:outputLabel for="model" value="Model:" />
                     <p:selectOneMenu id="model"
-                                     value="#{carBean.model}"
+                                     value="#{newCarBean.model}"
                                      effect="fade"
                                      var="m"
                                      autoWidth="true"
@@ -96,7 +96,7 @@
 
                     <f:facet name="footer">
                         <p:commandButton value="Add"
-                                         action="#{carBean.addNewCar}"
+                                         action="#{newCarBean.addNewCar}"
                                          update=":messages"
                                          oncomplete="markerAddComplete()"/>
                         <p:commandButton value="Cancel"
@@ -104,8 +104,8 @@
                     </f:facet>
                 </h:panelGrid>
 
-                <h:inputHidden id="lat" value="#{carBean.lat}" />
-                <h:inputHidden id="lng" value="#{carBean.lng}" />
+                <h:inputHidden id="lat" value="#{newCarBean.lat}" />
+                <h:inputHidden id="lng" value="#{newCarBean.lng}" />
             </h:form>
         </p:dialog>
     </ui:define>

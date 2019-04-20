@@ -22,10 +22,35 @@
                     model="#{mapView.simpleModel}"
                     streetView="true">
 
-                <p:ajax event="overlaySelect" listener="#{carBean.onMarkerSelect}" />
+                <p:ajax event="overlaySelect" listener="#{carSelectBean.onMarkerSelect}" />
                 <p:gmapInfoWindow>
+                    <h:panelGrid id="grid" columns="2" cellpadding="5" style="color: black">
+                        <h:outputLabel for="carNumber" value="Car Number:" style="font-weight:bold"/>
+                        <h:outputText id="carNumber" value="#{carSelectBean.car.carNumber}" />
 
-                    <h:outputText value="#{carBean.marker.title}" />
+                        <h:outputLabel for="manufacturer" value="Manufacturer:" style="font-weight:bold"/>
+                        <h:outputText id="manufacturer" value="#{carSelectBean.car.model.manufacturer}" />
+
+                        <h:outputLabel for="modelName" value="Model:" style="font-weight:bold"/>
+                        <h:outputText id="modelName" value="#{carSelectBean.car.model.modelName}" />
+
+                        <h:outputLabel for="price" value="Price per minute:" style="font-weight:bold"/>
+                        <h:outputText id="price" value="#{carSelectBean.car.model.pricePerMinute}" />
+
+                        <h:outputLabel for="fuel" value="Fuel:" style="font-weight:bold"/>
+                        <p:progressBar id="fuel" value="#{carSelectBean.car.fuel}"
+                                       labelTemplate="{value}%"
+                                       displayOnly="true"/>
+
+                        <h:outputLabel for="image" value="Image:" style="font-weight:bold"/>
+                        <o:graphicImage id="image"
+                                        value="#{modelRenderer.render(carSelectBean.car.model.id)}"
+                                        width="100"/>
+
+                        <p:commandButton value="Rent it!"
+                                         style="margin-right:10px"/>
+                    </h:panelGrid>
+
                 </p:gmapInfoWindow>
             </p:gmap>
         </p:panel>

@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class CarBean implements Serializable {
+public class NewCarBean implements Serializable {
     private Marker marker;
 
     @Inject
@@ -73,10 +73,6 @@ public class CarBean implements Serializable {
 
     public void setMarker(Marker marker) {
         this.marker = marker;
-    }
-
-    public void onMarkerSelect(OverlaySelectEvent event) {
-        this.marker = (Marker) event.getOverlay();
     }
 
     public void addNewCar() {

@@ -31,7 +31,7 @@ public class MapView implements Serializable {
         for(Car car: cars){
             LatLng coord = new LatLng(  car.getCoordinates().getLatitude(),
                                         car.getCoordinates().getLongitude());
-            simpleModel.addOverlay(new Marker(coord, car.getCarNumber()));
+            simpleModel.addOverlay(new Marker(coord, car.getCarNumber(), car.getId()));
         }
     }
 

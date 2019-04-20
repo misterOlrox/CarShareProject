@@ -54,5 +54,7 @@ public class CarsManager {
         return namedQuery.getResultList();
     }
 
-
+    public Car find(long id){
+        return entityManager.find(Car.class, id);
+    }
 }
