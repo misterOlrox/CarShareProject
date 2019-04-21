@@ -6,7 +6,7 @@
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">Admin</ui:define>
-    <ui:define name="content-intro-about">Hello for admin #{authorizationBean.login}</ui:define>
+    <ui:define name="content-intro-about">Hello for admin #{currentSessionBean.login}</ui:define>
 
     <ui:define name="content">
         <p:linkButton href="admin-map.xhtml" value="Admin Map" />

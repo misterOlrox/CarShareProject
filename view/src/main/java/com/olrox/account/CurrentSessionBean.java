@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class AuthorizationBean implements Serializable {
+public class CurrentSessionBean implements Serializable {
     private Role role;
 
     private String login;

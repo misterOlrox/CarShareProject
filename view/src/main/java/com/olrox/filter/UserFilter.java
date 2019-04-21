@@ -1,6 +1,6 @@
 package com.olrox.filter;
 
-import com.olrox.account.AuthorizationBean;
+import com.olrox.account.CurrentSessionBean;
 import com.olrox.account.domain.Role;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ public class UserFilter implements Filter {
     public final static String FILTER = "/user/";
 
     @Inject
-    private AuthorizationBean authorizationBean;
+    private CurrentSessionBean currentSessionBean;
 
 
     @Override
@@ -34,12 +34,12 @@ public class UserFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if(authorizationBean.getRole() != null){
+        if(currentSessionBean.getRole() != null){
 
             String uri = request.getRequestURI();
             String beginOfUserUri = request.getContextPath() + FILTER;
 
-            if(uri.startsWith(beginOfUserUri) && authorizationBean.getRole() != Role.USER){
+            if(uri.startsWith(beginOfUserUri) && currentSessionBean.getRole() != Role.USER){
                 response.sendRedirect(request.getContextPath() + "/errors.xhtml");
                 return;
             }
@@ -48,7 +48,7 @@ public class UserFilter implements Filter {
             return;
         }
 
-        authorizationBean.setRequestedPage(request.getRequestURI());
+        currentSessionBean.setRequestedPage(request.getRequestURI());
         response.sendRedirect(request.getContextPath() + "/index.xhtml");
     }
 

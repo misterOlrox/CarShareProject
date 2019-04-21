@@ -22,7 +22,7 @@ public class RegistrationBean implements Serializable {
     AuthorizationManager authorizationManager;
 
     @Inject
-    AuthorizationBean authorizationBean;
+    CurrentSessionBean currentSessionBean;
 
     private RentalUser rentalUser;
 
@@ -59,9 +59,9 @@ public class RegistrationBean implements Serializable {
             return;
         }
         addSuccessMessage();
-        authorizationBean.setLogin(credentials.getLogin());
-        authorizationBean.setRole(Role.USER);
-        authorizationBean.redirectToHome();
+        currentSessionBean.setLogin(credentials.getLogin());
+        currentSessionBean.setRole(Role.USER);
+        currentSessionBean.redirectToHome();
     }
 
     public void addSuccessMessage(){

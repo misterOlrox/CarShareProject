@@ -20,18 +20,18 @@
 
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>
-                    <p:inputText id="name" value="#{authorizationBean.login}" required="true" label="Username"/>
+                    <p:inputText id="name" value="#{currentSessionBean.login}" required="true" label="Username"/>
                     <p:message for="name"/>
 
                     <h:outputLabel for="password" value="Password:" style="font-weight:bold"/>
-                    <p:password id="password" label="Password" value="#{authorizationBean.password}" required="true" />
+                    <p:password id="password" label="Password" value="#{currentSessionBean.password}" required="true" />
                     <p:message for="password" />
 
                     <p:commandButton value="Sign in"
                                      update="grid"
                                      validateClient="true"
                                      style="margin-right:10px"
-                                     action="#{authorizationBean.doLogin()}"/>
+                                     action="#{currentSessionBean.doLogin()}"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>

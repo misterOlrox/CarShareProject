@@ -24,10 +24,10 @@
                         <h:form styleClass="ui-noborder" style="border: none">
                             <p:menubar styleClass="ui-noborder" style="border: none">
                                 <p:menuitem value="Map" url="/view/map.xhtml" icon="pi pi-globe" />
-                                <p:menuitem value="#{authorizationBean.login}" url="/view/#{authorizationBean.role}/hello.xhtml"
-                                            icon="pi pi-user" rendered="#{authorizationBean.role !=null }"/>
-                                <p:menuitem value="Log in" url="/view/index.xhtml" icon="pi pi-sign-in" rendered="#{authorizationBean.role == null}"/>
-                                <p:menuitem value="Sign-out" action="#{authorizationBean.doLogout}" icon="pi pi-sign-out" rendered="#{authorizationBean.role != null}"/>
+                                <p:menuitem value="#{currentSessionBean.login}" url="/view/#{currentSessionBean.role}/hello.xhtml"
+                                            icon="pi pi-user" rendered="#{currentSessionBean.role !=null }"/>
+                                <p:menuitem value="Log in" url="/view/index.xhtml" icon="pi pi-sign-in" rendered="#{currentSessionBean.role == null}"/>
+                                <p:menuitem value="Sign-out" action="#{currentSessionBean.doLogout}" icon="pi pi-sign-out" rendered="#{currentSessionBean.role != null}"/>
                             </p:menubar>
                         </h:form>
                     </div>

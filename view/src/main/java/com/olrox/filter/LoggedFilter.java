@@ -1,6 +1,6 @@
 package com.olrox.filter;
 
-import com.olrox.account.AuthorizationBean;
+import com.olrox.account.CurrentSessionBean;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class LoggedFilter implements Filter {
     @Inject
-    private AuthorizationBean authorizationBean;
+    private CurrentSessionBean currentSessionBean;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -30,8 +30,8 @@ public class LoggedFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if(authorizationBean.getRole() != null){
-            response.sendRedirect(authorizationBean.getRole() + "/hello.xhtml");
+        if(currentSessionBean.getRole() != null){
+            response.sendRedirect(currentSessionBean.getRole() + "/hello.xhtml");
         }
         filterChain.doFilter(servletRequest, servletResponse);
         return;

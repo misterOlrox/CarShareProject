@@ -1,6 +1,6 @@
 package com.olrox.filter;
 
-import com.olrox.account.AuthorizationBean;
+import com.olrox.account.CurrentSessionBean;
 import com.olrox.account.domain.Role;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ public class AdminFilter implements Filter {
     public final static String FILTER = "/admin/";
 
     @Inject
-    private AuthorizationBean authorizationBean;
+    private CurrentSessionBean currentSessionBean;
 
 
     @Override
@@ -34,12 +34,12 @@ public class AdminFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if(authorizationBean.getRole() != null){
+        if(currentSessionBean.getRole() != null){
 
             String uri = request.getRequestURI();
             String beginOfAdminUri = request.getContextPath() + FILTER;
 
-            if(uri.startsWith(beginOfAdminUri) && authorizationBean.getRole() != Role.ADMIN){
+            if(uri.startsWith(beginOfAdminUri) && currentSessionBean.getRole() != Role.ADMIN){
                 response.sendRedirect(request.getContextPath() + "/errors.xhtml");
                 return;
             }
@@ -48,7 +48,7 @@ public class AdminFilter implements Filter {
             return;
         }
 
-        authorizationBean.setRequestedPage(request.getRequestURI());
+        currentSessionBean.setRequestedPage(request.getRequestURI());
         response.sendRedirect(request.getContextPath() + "/index.xhtml");
     }
 
