@@ -4,6 +4,9 @@ import com.olrox.account.domain.Credentials;
 import com.olrox.account.domain.RentalUser;
 import com.olrox.account.domain.Role;
 import com.olrox.car.domain.Car;
+import com.olrox.car.domain.Status;
+import com.olrox.exception.CarAlreadyBookedException;
+import com.olrox.exception.HavingUnclosedOrdersException;
 import com.olrox.exception.IllegalRoleException;
 import com.olrox.order.domain.CarOrder;
 
@@ -12,6 +15,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 @LocalBean
@@ -22,11 +26,22 @@ public class CarOrdersManager {
     @EJB
     private BookingTimer bookingTimer;
 
-    public CarOrder createBookingOrder(Car car, String login) throws IllegalRoleException {
+    public CarOrder createBookingOrder(Car car, String login) throws    IllegalRoleException,
+                                                                        CarAlreadyBookedException,
+                                                                        HavingUnclosedOrdersException {
         RentalUser rentalUser = entityManager.find(Credentials.class, login).getRentalUser();
         if(rentalUser.getRole() != Role.USER){
             throw new IllegalRoleException(login);
         }
+
+        if(getUserUnclosedOrders(rentalUser.getId()).size()>0){
+            throw new HavingUnclosedOrdersException(Long.toString(rentalUser.getId()));
+        }
+
+        if(car.getStatus() == Status.BOOKED){
+            throw new CarAlreadyBookedException(car.getCarNumber());
+        }
+
 
         car.setStatus(com.olrox.car.domain.Status.BOOKED);
         entityManager.merge(car);
@@ -46,5 +61,11 @@ public class CarOrdersManager {
 
     public void merge(CarOrder carOrder){
         entityManager.merge(carOrder);
+    }
+
+    public List getUserUnclosedOrders(long userId){
+        return entityManager
+                .createQuery("from CarOrder as ord where ord.rentalUser.id=:userId and ord.status!='CLOSED'")
+                .setParameter("userId", userId).getResultList();
     }
 }

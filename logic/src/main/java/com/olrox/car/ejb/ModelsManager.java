@@ -41,8 +41,7 @@ public class ModelsManager {
     }
 
     public Model getModel(long id){
-        Model model = entityManager.find(Model.class, id);
-        return model;
+        return entityManager.find(Model.class, id);
     }
 
     public List<Model> getAll(){

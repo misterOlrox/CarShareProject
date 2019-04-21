@@ -9,6 +9,10 @@
     <ui:define name="content-intro">Map</ui:define>
     <ui:define name="content-intro-about">Available cars</ui:define>
 
+    <ui:define name="growls">
+        <p:growl id="messages" showDetail="true" />
+    </ui:define>
+
     <ui:define name="content">
         <script type="text/javascript"
                 src="https://maps.google.com/maps/api/js?callback=initMap&amp;key=AIzaSyCehOdPcTNmfLWYFimdSd3NWWLGrAGlWmo"></script>
@@ -22,8 +26,8 @@
                     model="#{mapView.simpleModel}"
                     streetView="true">
 
-                <p:ajax event="overlaySelect" listener="#{carSelectBean.onMarkerSelect}" />
-                <p:gmapInfoWindow>
+                <p:ajax event="overlaySelect" listener="#{carSelectBean.onMarkerSelect}" update=":messages"/>
+                <p:gmapInfoWindow rendered="#{carSelectBean.car != null}">
                     <h:panelGrid id="grid" columns="2" cellpadding="5" style="color: black">
                         <h:outputLabel for="carNumber" value="Car Number:" style="font-weight:bold"/>
                         <h:outputText id="carNumber" value="#{carSelectBean.car.carNumber}" />
@@ -49,6 +53,7 @@
 
                         <p:commandButton value="Rent it!"
                                          action="#{bookingBean.book}"
+                                         update=":messages"
                                          style="margin-right:10px"/>
                     </h:panelGrid>
 

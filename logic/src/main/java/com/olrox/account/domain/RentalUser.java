@@ -23,7 +23,7 @@ public class RentalUser {
 
     private String phoneNumber;
 
-    @OneToMany
+    @OneToMany(mappedBy = "rentalUser")
     private List<CarOrder> carOrder;
 
     public long getId() {
