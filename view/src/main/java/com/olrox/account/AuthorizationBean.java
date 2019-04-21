@@ -65,6 +65,10 @@ public class AuthorizationBean implements Serializable {
 
         role = authorizationManager.signIn(login, password);
 
+        redirectToHome();
+    }
+
+    public void redirectToHome(){
         if(role == null){
             addError();
         }

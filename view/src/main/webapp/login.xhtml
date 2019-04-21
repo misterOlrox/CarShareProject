@@ -27,8 +27,11 @@
                     <p:password id="password" label="Password" value="#{authorizationBean.password}" required="true" />
                     <p:message for="password" />
 
-                    <p:commandButton value="Sign in" update="grid"
-                                     validateClient="true" style="margin-right:10px" action="#{authorizationBean.doLogin()}"/>
+                    <p:commandButton value="Sign in"
+                                     update="grid"
+                                     validateClient="true"
+                                     style="margin-right:10px"
+                                     action="#{authorizationBean.doLogin()}"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>

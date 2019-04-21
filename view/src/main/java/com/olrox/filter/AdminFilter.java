@@ -49,7 +49,7 @@ public class AdminFilter implements Filter {
         }
 
         authorizationBean.setRequestedPage(request.getRequestURI());
-        response.sendRedirect(request.getContextPath() + "/signIn.xhtml");
+        response.sendRedirect(request.getContextPath() + "/index.xhtml");
     }
 
     @Override

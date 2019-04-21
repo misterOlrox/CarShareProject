@@ -4,6 +4,7 @@ package com.olrox.account.ejb;
 import com.olrox.account.domain.Credentials;
 import com.olrox.account.domain.RentalUser;
 import com.olrox.account.domain.Role;
+import com.olrox.exception.DuplicateCredentialsLoginException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.LocalBean;
@@ -39,9 +40,23 @@ public class AuthorizationManager {
         return rentalUser.getRole();
     }
 
-    public void signUp(Credentials credentials, RentalUser rentalUser){
+    public void signUp(Credentials credentials, RentalUser rentalUser) throws DuplicateCredentialsLoginException {
+        String login = credentials.getLogin();
+        if(isDuplicate(login)){
+            throw new DuplicateCredentialsLoginException(login);
+        }
         rentalUser.setCredentials(credentials);
         entityManager.persist(credentials);
         entityManager.persist(rentalUser);
+    }
+
+    private boolean isDuplicate(String value) {
+        if(entityManager.createQuery("from Credentials as c where c.login=:value")
+                .setParameter("value", value).getResultList().size()>0){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

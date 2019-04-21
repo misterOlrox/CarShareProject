@@ -1,4 +1,4 @@
-    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -17,26 +17,26 @@
                 <p:autoUpdate />
             </p:messages>
 
-            <p:panelGrid id="grid" columns="2">
-                <p:outputLabel for="login" value="Login:" />
+            <h:panelGrid id="grid" columns="2" cellpadding="5">
+                <p:outputLabel for="login" value="Login:" style="font-weight:bold"/>
                 <p:inputText id="login" value="#{registrationBean.credentials.login}" required="true"/>
 
-                <p:outputLabel value="Password" for="password" />
+                <p:outputLabel value="Password:" for="password" style="font-weight:bold"/>
                 <p:password id="password" label="Password"
                             value="#{registrationBean.credentials.password}"
                             feedback="true" required="true" match="password2" />
-                <p:outputLabel value="Confirm password" for="password2" />
+                <p:outputLabel value="Confirm password:" for="password2" style="font-weight:bold"/>
                 <p:password id="password2" label="Password"
                             value="#{registrationBean.credentials.password}"
                             feedback="false" required="true" />
 
-                <p:outputLabel for="name" value="Your name:" />
+                <p:outputLabel for="name" value="Your name:" style="font-weight:bold"/>
                 <p:inputText id="name" value="#{registrationBean.rentalUser.name}" required="true"/>
 
-                <p:outputLabel for="email" value="Your email:" />
+                <p:outputLabel for="email" value="Your email:" style="font-weight:bold"/>
                 <p:inputText id="email" value="#{registrationBean.rentalUser.email}" required="true"/>
 
-                <p:outputLabel for="phone" value="Phone number:" />
+                <p:outputLabel for="phone" value="Phone number:" style="font-weight:bold"/>
                 <p:inputMask id="phone"
                              value="#{registrationBean.rentalUser.phoneNumber}"
                              required="true"
@@ -46,11 +46,10 @@
                 <p:commandButton value="Create new account"
                                  action="#{registrationBean.createAccount()}"
                                  update="grid"
-                                 validateClient="true"
-                                 style="margin-right:10px">
+                                 validateClient="true">
                 </p:commandButton>
 
-            </p:panelGrid>
+            </h:panelGrid>
         </p:panel>
     </h:form>
 </ui:define>

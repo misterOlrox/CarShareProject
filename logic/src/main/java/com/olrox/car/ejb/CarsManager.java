@@ -4,6 +4,7 @@ import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Coordinates;
 import com.olrox.car.domain.Model;
 import com.olrox.car.domain.Status;
+import com.olrox.exception.DuplicateCarNumberException;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -18,9 +19,9 @@ public class CarsManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Car create(String carNumber, double lat, double lon, Model model) {
+    public Car create(String carNumber, double lat, double lon, Model model) throws DuplicateCarNumberException {
         if(isDuplicate(carNumber)){
-            return null;
+            throw new DuplicateCarNumberException(carNumber);
         }
 
         Car car = new Car();

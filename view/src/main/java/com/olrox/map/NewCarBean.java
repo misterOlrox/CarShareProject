@@ -3,8 +3,8 @@ package com.olrox.map;
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Model;
 import com.olrox.car.ejb.CarsManager;
+import com.olrox.exception.DuplicateCarNumberException;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.Marker;
 
@@ -80,9 +80,11 @@ public class NewCarBean implements Serializable {
             addNoModelMessage();
             return;
         }
-        Car car = carsManager.create(carNumber, lat, lng, model);
-        if(car==null){
-            addDuplicateCarMessage();
+        Car car;
+        try {
+            car = carsManager.create(carNumber, lat, lng, model);
+        } catch (DuplicateCarNumberException e) {
+            addDuplicateCarMessage(e.getMessage());
             return;
         }
         Marker marker = new Marker(new LatLng(lat, lng), carNumber, car.getId());
@@ -91,9 +93,9 @@ public class NewCarBean implements Serializable {
         PrimeFaces.current().executeScript("PF('dlg').hide();");
     }
 
-    private void addDuplicateCarMessage(){
+    private void addDuplicateCarMessage(String message){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Duplicate car", "car with number " + carNumber + " already exists."));
+                        "Duplicate car", message));
     }
 
     private void addSuccessMessage(){
