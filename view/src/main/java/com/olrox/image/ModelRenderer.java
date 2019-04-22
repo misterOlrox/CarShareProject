@@ -1,5 +1,6 @@
 package com.olrox.image;
 
+import com.olrox.car.domain.Model;
 import com.olrox.car.ejb.ModelsManager;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Utils;
@@ -16,7 +17,8 @@ public class ModelRenderer {
     ModelsManager modelsManager;
 
     public byte[] render(long id) {
-        byte[] image = modelsManager.getImage(id);
+        Model model = modelsManager.find(id);
+        byte[] image = model.getImage();
         if(image!=null){
             return image;
         }

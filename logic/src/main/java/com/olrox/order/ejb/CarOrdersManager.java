@@ -26,12 +26,11 @@ public class CarOrdersManager {
     @EJB
     private BookingTimer bookingTimer;
 
-    public CarOrder createBookingOrder(Car car, String login) throws    IllegalRoleException,
+    public CarOrder createBookingOrder(Car car, RentalUser rentalUser) throws    IllegalRoleException,
                                                                         CarAlreadyBookedException,
                                                                         HavingUnclosedOrdersException {
-        RentalUser rentalUser = entityManager.find(Credentials.class, login).getRentalUser();
         if(rentalUser.getRole() != Role.USER){
-            throw new IllegalRoleException(login);
+            throw new IllegalRoleException();
         }
 
         if(getUserUnclosedOrders(rentalUser.getId()).size()>0){

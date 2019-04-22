@@ -2,10 +2,8 @@ package com.olrox.map;
 
 import com.olrox.admin.ModelCollectorView;
 import com.olrox.car.domain.Model;
-import com.olrox.car.ejb.ModelsManager;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

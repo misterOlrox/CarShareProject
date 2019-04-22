@@ -1,6 +1,5 @@
 package com.olrox.order.ejb;
 
-import com.olrox.account.domain.RentalUser;
 import com.olrox.car.domain.Car;
 import com.olrox.car.ejb.CarsManager;
 import com.olrox.order.domain.CarOrder;

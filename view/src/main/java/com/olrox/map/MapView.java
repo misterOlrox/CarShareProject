@@ -3,14 +3,12 @@ package com.olrox.map;
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Status;
 import com.olrox.car.ejb.CarsManager;
-import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.io.Serializable;

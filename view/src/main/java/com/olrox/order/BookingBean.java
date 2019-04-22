@@ -1,6 +1,8 @@
 package com.olrox.order;
 
 import com.olrox.account.CurrentSessionBean;
+import com.olrox.account.domain.RentalUser;
+import com.olrox.account.ejb.RentalUsersManager;
 import com.olrox.car.domain.Car;
 import com.olrox.exception.CarAlreadyBookedException;
 import com.olrox.exception.HavingUnclosedOrdersException;
@@ -23,6 +25,9 @@ public class BookingBean implements Serializable {
     @EJB
     CarOrdersManager carOrdersManager;
 
+    @EJB
+    RentalUsersManager rentalUsersManager;
+
     @Inject
     CarSelectBean carSelectBean;
 
@@ -39,9 +44,10 @@ public class BookingBean implements Serializable {
         else {
 
             try {
-                carOrdersManager.createBookingOrder(car, login);
+                RentalUser rentalUser = rentalUsersManager.findByLogin(login);
+                carOrdersManager.createBookingOrder(car, rentalUser);
             } catch (IllegalRoleException e) {
-                e.printStackTrace();
+                addIllegalRoleMessage();
                 return;
             } catch (CarAlreadyBookedException e) {
                 addAlreadyBookedMessage(e.getMessage());
@@ -76,5 +82,10 @@ public class BookingBean implements Serializable {
     public void addUnclosedOrdersMessage(){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                 "Sorry.", "You have unclosed orders."));
+    }
+
+    public void addIllegalRoleMessage(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                "Sorry.", "You are not the user."));
     }
 }

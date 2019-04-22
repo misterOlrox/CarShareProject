@@ -15,32 +15,15 @@ public class ModelsManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Model create(String manufacturer, String modelName, int pricePerMinute, byte[] image){
-        Model model = new Model();
-        model.setManufacturer(manufacturer);
-        model.setModelName(modelName);
-        model.setPricePerMinute(pricePerMinute);
-        model.setImage(image);
-
-        entityManager.persist(model);
-        return model;
-    }
-
     public void persist(Model model){
         entityManager.persist(model);
     }
 
     public void remove(Model model){
-        //entityManager.remove(model);
         entityManager.remove(entityManager.contains(model) ? model : entityManager.merge(model));
     }
 
-    public byte[] getImage(long id){
-        Model model = entityManager.find(Model.class, id);
-        return model.getImage();
-    }
-
-    public Model getModel(long id){
+    public Model find(long id){
         return entityManager.find(Model.class, id);
     }
 
