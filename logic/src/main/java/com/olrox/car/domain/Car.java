@@ -27,7 +27,7 @@ public class Car {
     private List<CarOrder> orders;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private CarStatus carStatus;
 
     public String getCarNumber() {
         return carNumber;
@@ -69,12 +69,12 @@ public class Car {
         this.orders = orders;
     }
 
-    public Status getStatus() {
-        return status;
+    public CarStatus getCarStatus() {
+        return carStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCarStatus(CarStatus carStatus) {
+        this.carStatus = carStatus;
     }
 
     public long getId() {

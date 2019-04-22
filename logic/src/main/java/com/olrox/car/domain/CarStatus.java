@@ -1,6 +1,6 @@
 package com.olrox.car.domain;
 
-public enum Status {
+public enum CarStatus {
     FREE,
     BOOKED,
 }

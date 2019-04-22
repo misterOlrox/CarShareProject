@@ -1,9 +1,10 @@
 package com.olrox.order.ejb;
 
 import com.olrox.car.domain.Car;
+import com.olrox.car.domain.CarStatus;
 import com.olrox.car.ejb.CarsManager;
 import com.olrox.order.domain.CarOrder;
-import com.olrox.order.domain.Status;
+import com.olrox.order.domain.OrderStatus;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -32,10 +33,10 @@ public class BookingTimer {
     public void timeoutHandler(Timer timer) {
         long id = (long)timer.getInfo();
         CarOrder carOrder = carOrdersManager.find(id);
-        if(carOrder.getStatus() == Status.BOOKED) {
-            carOrder.setStatus(Status.CLOSED);
+        if(carOrder.getOrderStatus() == OrderStatus.BOOKED) {
+            carOrder.setOrderStatus(OrderStatus.CLOSED);
             Car bookedCar = carOrder.getCar();
-            bookedCar.setStatus(com.olrox.car.domain.Status.FREE);
+            bookedCar.setCarStatus(CarStatus.FREE);
             carsManager.merge(bookedCar);
             carOrdersManager.merge(carOrder);
         }

@@ -59,9 +59,9 @@ public class RegistrationBean implements Serializable {
             return;
         }
         addSuccessMessage();
+        currentSessionBean.setCurrentUser(rentalUser);
         currentSessionBean.setLogin(credentials.getLogin());
-        currentSessionBean.setRole(Role.USER);
-        currentSessionBean.redirectToHome();
+        currentSessionBean.redirectToRequestedPage();
     }
 
     public void addSuccessMessage(){

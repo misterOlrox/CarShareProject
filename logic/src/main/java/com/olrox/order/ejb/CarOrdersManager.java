@@ -1,14 +1,14 @@
 package com.olrox.order.ejb;
 
-import com.olrox.account.domain.Credentials;
 import com.olrox.account.domain.RentalUser;
 import com.olrox.account.domain.Role;
 import com.olrox.car.domain.Car;
-import com.olrox.car.domain.Status;
+import com.olrox.car.domain.CarStatus;
 import com.olrox.exception.CarAlreadyBookedException;
 import com.olrox.exception.HavingUnclosedOrdersException;
 import com.olrox.exception.IllegalRoleException;
 import com.olrox.order.domain.CarOrder;
+import com.olrox.order.domain.OrderStatus;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -37,18 +37,18 @@ public class CarOrdersManager {
             throw new HavingUnclosedOrdersException(Long.toString(rentalUser.getId()));
         }
 
-        if(car.getStatus() == Status.BOOKED){
+        if(car.getCarStatus() == CarStatus.BOOKED){
             throw new CarAlreadyBookedException(car.getCarNumber());
         }
 
 
-        car.setStatus(com.olrox.car.domain.Status.BOOKED);
+        car.setCarStatus(CarStatus.BOOKED);
         entityManager.merge(car);
 
         CarOrder order = new CarOrder();
         order.setCar(car);
         order.setRentalUser(rentalUser);
-        order.setStatus(com.olrox.order.domain.Status.BOOKED);
+        order.setOrderStatus(OrderStatus.BOOKED);
         entityManager.persist(order);
         bookingTimer.startBooking(order);
         return order;
@@ -64,7 +64,7 @@ public class CarOrdersManager {
 
     public List getUserUnclosedOrders(long userId){
         return entityManager
-                .createQuery("from CarOrder as ord where ord.rentalUser.id=:userId and ord.status!='CLOSED'")
+                .createQuery("from CarOrder as ord where ord.rentalUser.id=:userId and ord.orderStatus!='CLOSED'")
                 .setParameter("userId", userId).getResultList();
     }
 }

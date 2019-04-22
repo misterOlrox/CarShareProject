@@ -18,7 +18,7 @@ public class AuthorizationManager {
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Role signIn(String name, String password){
+    public RentalUser signIn(String name, String password){
         if(StringUtils.isEmpty(name) || StringUtils.isEmpty(password)){
             return null;
         }
@@ -33,11 +33,8 @@ public class AuthorizationManager {
         }
 
         RentalUser rentalUser = credentials.getRentalUser();
-        if(rentalUser == null){
-            return null;
-        }
 
-        return rentalUser.getRole();
+        return rentalUser;
     }
 
     public void signUp(Credentials credentials, RentalUser rentalUser) throws DuplicateCredentialsLoginException {

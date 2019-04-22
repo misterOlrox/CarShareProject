@@ -26,7 +26,7 @@ public class CarOrder {
     private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private OrderStatus orderStatus;
 
     @ManyToOne
     private Car car;
@@ -65,12 +65,12 @@ public class CarOrder {
         this.endTime = endTime;
     }
 
-    public Status getStatus() {
-        return status;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Car getCar() {

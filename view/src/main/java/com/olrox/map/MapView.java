@@ -1,7 +1,7 @@
 package com.olrox.map;
 
 import com.olrox.car.domain.Car;
-import com.olrox.car.domain.Status;
+import com.olrox.car.domain.CarStatus;
 import com.olrox.car.ejb.CarsManager;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -27,7 +27,7 @@ public class MapView implements Serializable {
         simpleModel = new CustomMapModel();
         List<Car> cars = carsManager.getAll();
         for(Car car: cars){
-            if(car.getStatus() == Status.FREE) {
+            if(car.getCarStatus() == CarStatus.FREE) {
                 LatLng coord = new LatLng(car.getCoordinates().getLatitude(),
                         car.getCoordinates().getLongitude());
                 Marker marker = new Marker(coord, car.getCarNumber(), car.getId());

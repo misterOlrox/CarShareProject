@@ -1,9 +1,9 @@
 package com.olrox.order.domain;
 
-public enum Status {
+public enum OrderStatus {
     BOOKED,
     CLOSED,
     RIDE,
-    NOT_PAID,
+    RIDE_OVER,
     PAID
 }

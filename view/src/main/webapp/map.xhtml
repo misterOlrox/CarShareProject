@@ -17,6 +17,50 @@
         <script type="text/javascript"
                 src="https://maps.google.com/maps/api/js?callback=initMap&amp;key=AIzaSyCehOdPcTNmfLWYFimdSd3NWWLGrAGlWmo"></script>
 
+        <script type="text/javascript">
+            if (navigator.geolocation) {
+                checkGeolocationByHTML5();
+            } else {
+                checkGeolocationByLoaderAPI(); // HTML5 not supported! Fall back to Loader API.
+            }
+
+            function checkGeolocationByHTML5() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    setMapCenter(position.coords.latitude, position.coords.longitude);
+                }, function() {
+                    checkGeolocationByLoaderAPI(); // Error! Fall back to Loader API.
+                });
+            }
+
+            function checkGeolocationByLoaderAPI() {
+                if (google.loader.ClientLocation) {
+                    setMapCenter(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
+                } else {
+                    // Unsupported! Show error/warning?
+                }
+            }
+
+            function setMapCenter(latitude, longitude) {
+                var pos = {
+                    lat: latitude,
+                    lng: longitude
+                };
+                var contentString = '&lt;div style=&quot;color: black&quot;&gt;You are here!&lt;/div&gt;';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    title: 'You are here!',
+                    icon: 'https://maps.google.com/mapfiles/ms/micons/pink-dot.png',
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(PF('map').getMap(), marker);
+                });
+                PF('map').addOverlay(marker);
+            }
+        </script>
 
         <p:panel>
             <p:gmap center="53.894206, 27.547164"
@@ -24,7 +68,8 @@
                     type="ROADMAP"
                     style="width:100%;height:600px"
                     model="#{mapView.simpleModel}"
-                    streetView="true">
+                    streetView="true"
+                    widgetVar="map">
 
                 <p:ajax event="overlaySelect" listener="#{carSelectBean.onMarkerSelect}" update=":messages"/>
                 <p:gmapInfoWindow rendered="#{carSelectBean.car != null}">
@@ -60,5 +105,16 @@
                 </p:gmapInfoWindow>
             </p:gmap>
         </p:panel>
+
+        <p:dialog header="Car booked!" widgetVar="#{bookingBean.dlgVar}" minHeight="100" modal="true">
+            <h:outputText value="Now you can go to your current orders." />
+            <br/>
+            <p:commandButton value="Your current order"
+                             action="user/current-order.xhtml?faces-redirect=true"
+                             style="margin-right: 20px;"
+
+                                />
+            <br/>
+        </p:dialog>
     </ui:define>
 </ui:composition>

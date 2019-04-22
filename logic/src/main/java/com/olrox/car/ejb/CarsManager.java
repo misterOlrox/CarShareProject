@@ -3,7 +3,7 @@ package com.olrox.car.ejb;
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.Coordinates;
 import com.olrox.car.domain.Model;
-import com.olrox.car.domain.Status;
+import com.olrox.car.domain.CarStatus;
 import com.olrox.exception.DuplicateCarNumberException;
 
 import javax.ejb.LocalBean;
@@ -31,7 +31,7 @@ public class CarsManager {
         coordinates.setLatitude(lat);
         coordinates.setLongitude(lon);
         car.setCoordinates(coordinates);
-        car.setStatus(Status.FREE);
+        car.setCarStatus(CarStatus.FREE);
         car.setModel(model);
 
         entityManager.persist(coordinates);

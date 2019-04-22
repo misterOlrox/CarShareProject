@@ -9,7 +9,11 @@
     <ui:define name="content-intro-about">Hello for user #{currentSessionBean.login}</ui:define>
 
     <ui:define name="content">
+        <p:linkButton href="current-order.xhtml" value="Current order" />
 
+        <p:separator />
+
+        <p:linkButton href="history.xhtml" value="History" />
     </ui:define>
 
 </ui:composition>

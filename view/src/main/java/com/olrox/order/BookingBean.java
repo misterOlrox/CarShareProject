@@ -9,6 +9,7 @@ import com.olrox.exception.HavingUnclosedOrdersException;
 import com.olrox.exception.IllegalRoleException;
 import com.olrox.map.CarSelectBean;
 import com.olrox.order.ejb.CarOrdersManager;
+import org.primefaces.PrimeFaces;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -22,6 +23,8 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class BookingBean implements Serializable {
+    private final static String DLG_VAR = "bookedDlg";
+
     @EJB
     CarOrdersManager carOrdersManager;
 
@@ -36,15 +39,13 @@ public class BookingBean implements Serializable {
 
     public void book(){
         Car car = carSelectBean.getCar();
-        String login = currentSessionBean.getLogin();
 
         if(currentSessionBean.getRole() == null){
             redirectToAuthorizationPage();
         }
         else {
-
             try {
-                RentalUser rentalUser = rentalUsersManager.findByLogin(login);
+                RentalUser rentalUser = currentSessionBean.getCurrentUser();
                 carOrdersManager.createBookingOrder(car, rentalUser);
             } catch (IllegalRoleException e) {
                 addIllegalRoleMessage();
@@ -56,6 +57,7 @@ public class BookingBean implements Serializable {
                 addUnclosedOrdersMessage();
                 return;
             }
+            PrimeFaces.current().executeScript("PF('"+ DLG_VAR +"').show();");
             addSuccessMessage();
         }
     }
@@ -87,5 +89,9 @@ public class BookingBean implements Serializable {
     public void addIllegalRoleMessage(){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                 "Sorry.", "You are not the user."));
+    }
+
+    public String getDlgVar() {
+        return DLG_VAR;
     }
 }
