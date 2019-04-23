@@ -3,34 +3,83 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">Current order</ui:define>
     <ui:define name="content-intro-about">Here you can see your current order</ui:define>
 
     <ui:define name="content">
-        <h:form >
-            <p:panel header="Order" rendered="#{currentOrderBean.valid}">
+        <h:form id="form">
+            <p:panel header="Order" rendered="#{currentOrderBean.active}">
                 <p:messages id="messages" showDetail="false" closable="true" >
                     <p:autoUpdate />
                 </p:messages>
 
-                <h:panelGrid id="grid" columns="2" cellpadding="5">
-                    <p:commandButton id="beep" value="Beep" icon="pi pi-bell"/>
-                    <p:outputLabel for="beep" value="Your car will beep" style="font-weight:bold"/>
+                <p:panel header="Current car" >
+                    <h:panelGrid id="carGrid" columns="2" cellpadding="5">
+                        <h:outputLabel for="carNumber" value="Car Number:" style="font-weight:bold"/>
+                        <h:outputText id="carNumber" value="#{currentOrderBean.currentCar.carNumber}" />
 
+                        <h:outputLabel for="manufacturer" value="Manufacturer:" style="font-weight:bold"/>
+                        <h:outputText id="manufacturer" value="#{currentOrderBean.currentCar.model.manufacturer}" />
+
+                        <h:outputLabel for="modelName" value="Model:" style="font-weight:bold"/>
+                        <h:outputText id="modelName" value="#{currentOrderBean.currentCar.model.modelName}" />
+
+                        <h:outputLabel for="price" value="Price per minute:" style="font-weight:bold"/>
+                        <h:outputText id="price" value="#{currentOrderBean.currentCar.model.pricePerMinute}" />
+
+                        <h:outputLabel for="fuel" value="Fuel:" style="font-weight:bold"/>
+                        <p:progressBar id="fuel" value="#{currentOrderBean.currentCar.fuel}"
+                                       labelTemplate="{value}%"
+                                       displayOnly="true"/>
+
+                        <h:outputLabel for="image" value="Image:" style="font-weight:bold"/>
+                        <o:graphicImage id="image"
+                                        value="#{modelRenderer.render(currentOrderBean.currentCar.model.id)}"
+                                        width="200"/>
+                    </h:panelGrid>
+                </p:panel>
+
+
+
+                <h:panelGrid id="grid" columns="2" cellpadding="5">
+
+
+                    <p:commandButton id="beep" value="Beep" icon="pi pi-bell"/>
+                    <p:outputLabel for="beep" value="Your car will beep." style="font-weight:bold"/>
+
+                    <p:commandButton id="unlock" value="Unlock" icon="pi pi-unlock"/>
+                    <p:outputLabel for="unlock" value="Unlock your car and start the trip." style="font-weight:bold"/>
+
+                    <p:commandButton id="finish" value="Finish" icon="pi pi-check"/>
+                    <p:outputLabel for="finish" value="Finish the trip." style="font-weight:bold"/>
+
+                    <p:commandButton id="cancel"
+                                     value="Cancel"
+                                     icon="pi pi-times"
+                                     action="#{currentOrderBean.cancel}"/>
+
+                    <p:outputLabel for="cancel" value="Cancel booking." style="font-weight:bold"/>
 
                 </h:panelGrid>
             </p:panel>
 
-            <p:panel header="Order" rendered="#{!currentOrderBean.valid}">
+            <p:panel header="Order" rendered="#{!currentOrderBean.active}">
                 <h:outputText value="You haven't active orders."/>
                 <br/>
                 <p:commandButton value="Go to history"
                                  action="history.xhtml?faces-redirect=true"
-                                 style="margin-right: 20px;"
-
+                                 style="margin-right: 20px;margin-top: 20px;"
                 />
+
+                <br/>
+                <a href="#{request.contextPath}/map.xhtml?faces-redirect=true">
+                    <p:button value="Go to map"
+                                     style="margin-right: 20px;margin-top: 20px;"
+                                     />
+                </a>
             </p:panel>
         </h:form>
 

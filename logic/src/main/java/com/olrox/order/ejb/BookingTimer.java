@@ -18,10 +18,7 @@ import javax.ejb.TimerService;
 @Stateless
 @LocalBean
 public class BookingTimer {
-    public final static long DURATION = 20000;
-
-    @EJB
-    CarsManager carsManager;
+    public final static long DURATION = 30000;
 
     @EJB
     CarOrdersManager carOrdersManager;
@@ -32,14 +29,7 @@ public class BookingTimer {
     @Timeout
     public void timeoutHandler(Timer timer) {
         long id = (long)timer.getInfo();
-        CarOrder carOrder = carOrdersManager.find(id);
-        if(carOrder.getOrderStatus() == OrderStatus.BOOKED) {
-            carOrder.setOrderStatus(OrderStatus.CLOSED);
-            Car bookedCar = carOrder.getCar();
-            bookedCar.setCarStatus(CarStatus.FREE);
-            carsManager.merge(bookedCar);
-            carOrdersManager.merge(carOrder);
-        }
+        carOrdersManager.cancelOrder(id);
     }
 
     public void startBooking(CarOrder carOrder){

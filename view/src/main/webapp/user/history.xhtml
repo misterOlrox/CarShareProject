@@ -3,13 +3,39 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content-intro">History</ui:define>
     <ui:define name="content-intro-about">All your orders</ui:define>
 
     <ui:define name="content">
+        <h:form>
+            <p:outputPanel id="ordersPanel">
+                <p:dataTable value="#{orderHistoryBean.orderHistory}" var="order" id="orders">
 
+                    <p:column headerText="Order ID">
+                        <h:outputText value="#{order.id}" />
+                    </p:column>
+
+                    <p:column headerText="Start time">
+                        <h:outputText value="#{order.startTime}" />
+                    </p:column>
+
+                    <p:column headerText="End time">
+                        <h:outputText value="#{order.endTime}" />
+                    </p:column>
+
+                    <p:column headerText="Final score">
+                        <h:outputText value="#{order.finalScore}" />
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:outputText value="#{order.orderStatus}" />
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel>
+        </h:form>
     </ui:define>
 
 </ui:composition>

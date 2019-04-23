@@ -37,7 +37,7 @@ public class CurrentSessionBean implements Serializable {
     }
 
     public void redirectToRequestedPage(){
-        Role role = currentUser.getRole();
+        Role role = getRole();
         if(role == null){
             addError();
         }

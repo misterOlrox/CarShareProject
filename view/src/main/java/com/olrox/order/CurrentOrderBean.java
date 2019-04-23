@@ -2,14 +2,16 @@ package com.olrox.order;
 
 import com.olrox.account.CurrentSessionBean;
 import com.olrox.account.domain.RentalUser;
-import com.olrox.account.ejb.RentalUsersManager;
+import com.olrox.car.domain.Car;
+import com.olrox.exception.TooManyActiveOrdersException;
 import com.olrox.order.domain.CarOrder;
-import com.olrox.order.domain.OrderStatus;
 import com.olrox.order.ejb.CarOrdersManager;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -20,15 +22,10 @@ public class CurrentOrderBean implements Serializable {
     @EJB
     CarOrdersManager carOrdersManager;
 
-    @EJB
-    RentalUsersManager rentalUsersManager;
-
     @Inject
     CurrentSessionBean currentSessionBean;
 
     CarOrder currentOrder;
-
-    boolean valid;
 
     public CarOrder getCurrentOrder() {
         return currentOrder;
@@ -38,23 +35,42 @@ public class CurrentOrderBean implements Serializable {
         this.currentOrder = currentOrder;
     }
 
-    @PostConstruct
-    public void update(){
-        System.out.println("Valided");
-        /*RentalUser user = currentSessionBean.getCurrentUser();
-        currentOrder = carOrdersManager.find(user.);
-        OrderStatus status = currentOrder.getOrderStatus();
-        if(    status == OrderStatus.BOOKED
-            || status == OrderStatus.RIDE
-            || status == OrderStatus.RIDE_OVER){
-            valid = true;
+    public Car getCurrentCar(){
+        if(isActive()){
+            return currentOrder.getCar();
         }
         else{
-            valid = false;
-        }*/
+            return null;
+        }
     }
 
-    public boolean isValid() {
-        return valid;
+    public boolean isActive(){
+        if(currentOrder==null){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    @PostConstruct
+    public void update(){
+        RentalUser user = currentSessionBean.getCurrentUser();
+        try {
+            currentOrder = carOrdersManager.getActiveOrder(user.getId());
+        } catch (TooManyActiveOrdersException e) {
+            addFatalMessage(e.getMessage());
+            return;
+        }
+    }
+
+    private void addFatalMessage(String message){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,
+                "Fatal error.", message));
+    }
+
+    public String cancel(){
+        carOrdersManager.cancelOrder(currentOrder.getId());
+        return "current-order.xhtml?faces-redirect=true";
     }
 }

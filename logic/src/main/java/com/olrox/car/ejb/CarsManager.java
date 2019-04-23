@@ -58,8 +58,4 @@ public class CarsManager {
     public Car find(long id){
         return entityManager.find(Car.class, id);
     }
-
-    public void merge(Car car){
-        entityManager.merge(car);
-    }
 }

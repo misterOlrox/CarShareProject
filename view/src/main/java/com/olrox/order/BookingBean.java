@@ -5,7 +5,7 @@ import com.olrox.account.domain.RentalUser;
 import com.olrox.account.ejb.RentalUsersManager;
 import com.olrox.car.domain.Car;
 import com.olrox.exception.CarAlreadyBookedException;
-import com.olrox.exception.HavingUnclosedOrdersException;
+import com.olrox.exception.TooManyActiveOrdersException;
 import com.olrox.exception.IllegalRoleException;
 import com.olrox.map.CarSelectBean;
 import com.olrox.order.ejb.CarOrdersManager;
@@ -53,7 +53,7 @@ public class BookingBean implements Serializable {
             } catch (CarAlreadyBookedException e) {
                 addAlreadyBookedMessage(e.getMessage());
                 return;
-            } catch (HavingUnclosedOrdersException e) {
+            } catch (TooManyActiveOrdersException e) {
                 addUnclosedOrdersMessage();
                 return;
             }
