@@ -21,6 +21,8 @@ public class CarOrder {
     @ManyToOne
     private RentalUser rentalUser;
 
+    private LocalDateTime bookingTime;
+
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
@@ -87,5 +89,13 @@ public class CarOrder {
 
     public void setFinalScore(int finalScore) {
         this.finalScore = finalScore;
+    }
+
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 }

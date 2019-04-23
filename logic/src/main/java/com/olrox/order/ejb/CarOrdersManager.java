@@ -15,6 +15,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
@@ -48,6 +49,7 @@ public class CarOrdersManager {
         order.setCar(car);
         order.setRentalUser(rentalUser);
         order.setOrderStatus(OrderStatus.BOOKING);
+        order.setBookingTime(LocalDateTime.now());
         entityManager.persist(order);
         bookingTimer.startBooking(order);
         return order;
