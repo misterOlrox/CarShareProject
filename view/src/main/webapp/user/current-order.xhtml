@@ -74,6 +74,9 @@
                     <p:commandButton id="finish"
                                      value="Finish"
                                      icon="pi pi-check"
+                                     update="messages"
+                                     ajax="false"
+                                     action="#{finishRideBean.finishRide}"
                                      rendered="#{currentOrderBean.ride}"/>
                     <p:outputLabel for="finish"
                                    value="Finish the trip."
