@@ -9,12 +9,14 @@
     <ui:define name="content-intro">Current order</ui:define>
     <ui:define name="content-intro-about">Here you can see your current order</ui:define>
 
+    <ui:define name="growls">
+        <p:growl id="messages" showDetail="true" />
+    </ui:define>
+
     <ui:define name="content">
         <h:form id="form">
-            <p:panel header="Order" rendered="#{currentOrderBean.active}">
-                <p:messages id="messages" showDetail="false" closable="true" >
-                    <p:autoUpdate />
-                </p:messages>
+            <p:panel id="panelOrder" header="Order" rendered="#{currentOrderBean.active}" widgetVar="panelOrder">
+
 
                 <p:panel header="Current car" >
                     <h:panelGrid id="carGrid" columns="2" cellpadding="5">
@@ -47,21 +49,48 @@
                 <h:panelGrid id="grid" columns="2" cellpadding="5">
 
 
-                    <p:commandButton id="beep" value="Beep" icon="pi pi-bell"/>
+                    <p:commandButton id="beep"
+                                     value="Beep"
+                                     icon="pi pi-bell"
+                                     update="messages"
+                                     ajax="false"
+                                     action="#{currentOrderBean.beep}"
+                    />
                     <p:outputLabel for="beep" value="Your car will beep." style="font-weight:bold"/>
 
-                    <p:commandButton id="unlock" value="Unlock" icon="pi pi-unlock"/>
-                    <p:outputLabel for="unlock" value="Unlock your car and start the trip." style="font-weight:bold"/>
+                    <p:commandButton id="unlock"
+                                     value="Unlock"
+                                     icon="pi pi-unlock"
+                                     update="messages"
+                                     ajax="false"
+                                     action="#{currentOrderBean.startRide}"
+                                     rendered="#{currentOrderBean.booking}"/>
+                    <p:outputLabel for="unlock"
+                                   value="Unlock your car and start the trip."
+                                   style="font-weight:bold"
+                                   rendered="#{currentOrderBean.booking}"/>
 
-                    <p:commandButton id="finish" value="Finish" icon="pi pi-check"/>
-                    <p:outputLabel for="finish" value="Finish the trip." style="font-weight:bold"/>
+
+                    <p:commandButton id="finish"
+                                     value="Finish"
+                                     icon="pi pi-check"
+                                     rendered="#{currentOrderBean.ride}"/>
+                    <p:outputLabel for="finish"
+                                   value="Finish the trip."
+                                   style="font-weight:bold"
+                                   rendered="#{currentOrderBean.ride}"/>
+
 
                     <p:commandButton id="cancel"
                                      value="Cancel"
                                      icon="pi pi-times"
-                                     action="#{currentOrderBean.cancel}"/>
-
-                    <p:outputLabel for="cancel" value="Cancel booking." style="font-weight:bold"/>
+                                     ajax="false"
+                                     action="#{currentOrderBean.cancel}"
+                                     rendered="#{currentOrderBean.booking}"/>
+                    <p:outputLabel for="cancel"
+                                   value="Cancel booking."
+                                   style="font-weight:bold"
+                                   rendered="#{currentOrderBean.booking}"/>
 
                 </h:panelGrid>
             </p:panel>

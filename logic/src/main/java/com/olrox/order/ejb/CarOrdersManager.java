@@ -5,6 +5,7 @@ import com.olrox.account.domain.Role;
 import com.olrox.car.domain.Car;
 import com.olrox.car.domain.CarStatus;
 import com.olrox.exception.CarAlreadyBookedException;
+import com.olrox.exception.CarNotBookedException;
 import com.olrox.exception.TooManyActiveOrdersException;
 import com.olrox.exception.IllegalRoleException;
 import com.olrox.order.domain.CarOrder;
@@ -93,5 +94,15 @@ public class CarOrdersManager {
             entityManager.merge(bookedCar);
             entityManager.merge(carOrder);
         }
+    }
+
+    public void startRide(long orderId) throws CarNotBookedException {
+        CarOrder order = this.find(orderId);
+        if(order.getOrderStatus() != OrderStatus.BOOKING){
+            throw new CarNotBookedException(Long.toString(order.getCar().getId()));
+        }
+        order.setOrderStatus(OrderStatus.RIDE);
+        order.setStartTime(LocalDateTime.now());
+        entityManager.persist(order);
     }
 }
