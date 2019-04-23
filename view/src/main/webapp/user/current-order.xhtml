@@ -54,7 +54,7 @@
                                      icon="pi pi-bell"
                                      update="messages"
                                      ajax="false"
-                                     action="#{currentOrderBean.beep}"
+                                     action="#{beepBean.beep}"
                     />
                     <p:outputLabel for="beep" value="Your car will beep." style="font-weight:bold"/>
 
@@ -63,7 +63,7 @@
                                      icon="pi pi-unlock"
                                      update="messages"
                                      ajax="false"
-                                     action="#{currentOrderBean.startRide}"
+                                     action="#{startRideBean.startRide}"
                                      rendered="#{currentOrderBean.booking}"/>
                     <p:outputLabel for="unlock"
                                    value="Unlock your car and start the trip."

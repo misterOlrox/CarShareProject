@@ -16,7 +16,7 @@ import java.io.Serializable;
 @SessionScoped
 public class CarSelectBean implements Serializable {
     @EJB
-    CarsManager carsManager;
+    private CarsManager carsManager;
 
     private Car car;
 

@@ -3,8 +3,6 @@ package com.olrox.order;
 import com.olrox.account.CurrentSessionBean;
 import com.olrox.account.domain.RentalUser;
 import com.olrox.car.domain.Car;
-import com.olrox.carinteraction.CarBeeper;
-import com.olrox.exception.CarNotBookedException;
 import com.olrox.exception.TooManyActiveOrdersException;
 import com.olrox.order.domain.CarOrder;
 import com.olrox.order.domain.OrderStatus;
@@ -23,17 +21,14 @@ import java.io.Serializable;
 @RequestScoped
 public class CurrentOrderBean implements Serializable {
     @EJB
-    CarOrdersManager carOrdersManager;
-
-    @EJB
-    CarBeeper carBeeper;
+    private CarOrdersManager carOrdersManager;
 
     @Inject
-    CurrentSessionBean currentSessionBean;
+    private CurrentSessionBean currentSessionBean;
 
-    CarOrder currentOrder;
+    private CarOrder currentOrder;
 
-    Car currentCar;
+    private Car currentCar;
 
     public CarOrder getCurrentOrder() {
         return currentOrder;
@@ -93,42 +88,6 @@ public class CurrentOrderBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,
                 "Fatal error.", message));
     }
-
-    public String beep(){
-        carBeeper.beep(currentOrder.getCar());
-        addBeepMessage();
-        return null;
-    }
-
-    private void addBeepMessage(){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Info.", "Your car beeped."));
-    }
-
-    public String startRide(){
-        try {
-            carOrdersManager.startRide(currentOrder.getId());
-        } catch (CarNotBookedException e) {
-            addErrorMessage(e.getMessage());
-            return null;
-        }
-        addRideStartedMessage();
-        return "current-order.xhtml?faces-redirect=true";
-    }
-
-    private void addRideStartedMessage(){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Enjoy.", "Your ride begins."));
-    }
-
-    private void addErrorMessage(String message){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Error.", message));
-    }
-
-
-
-
 
     public String cancel(){
         carOrdersManager.cancelOrder(currentOrder.getId());

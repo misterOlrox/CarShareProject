@@ -19,10 +19,10 @@ import java.io.Serializable;
 @RequestScoped
 public class RegistrationBean implements Serializable {
     @EJB
-    AuthorizationManager authorizationManager;
+    private AuthorizationManager authorizationManager;
 
     @Inject
-    CurrentSessionBean currentSessionBean;
+    private CurrentSessionBean currentSessionBean;
 
     private RentalUser rentalUser;
 

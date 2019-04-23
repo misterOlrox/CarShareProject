@@ -16,7 +16,7 @@ import java.io.Serializable;
 @FacesConverter(value="ModelMenuConverter")
 public class ModelMenuConverter implements Converter, Serializable {
     @Inject
-    ModelCollectorView modelCollectorView;
+    private ModelCollectorView modelCollectorView;
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

@@ -21,7 +21,7 @@ public class BookingTimer {
     public final static long DURATION = 30000;
 
     @EJB
-    CarOrdersManager carOrdersManager;
+    private CarOrdersManager carOrdersManager;
 
     @Resource
     protected TimerService timerService;

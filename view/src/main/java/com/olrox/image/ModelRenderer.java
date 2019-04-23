@@ -14,7 +14,7 @@ import java.io.IOException;
 @ApplicationScoped
 public class ModelRenderer {
     @EJB
-    ModelsManager modelsManager;
+    private ModelsManager modelsManager;
 
     public byte[] render(long id) {
         Model model = modelsManager.find(id);

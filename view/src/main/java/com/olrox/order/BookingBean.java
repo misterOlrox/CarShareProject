@@ -26,16 +26,16 @@ public class BookingBean implements Serializable {
     private final static String DLG_VAR = "bookedDlg";
 
     @EJB
-    CarOrdersManager carOrdersManager;
+    private CarOrdersManager carOrdersManager;
 
     @EJB
-    RentalUsersManager rentalUsersManager;
+    private RentalUsersManager rentalUsersManager;
 
     @Inject
-    CarSelectBean carSelectBean;
+    private CarSelectBean carSelectBean;
 
     @Inject
-    CurrentSessionBean currentSessionBean;
+    private CurrentSessionBean currentSessionBean;
 
     public void book(){
         Car car = carSelectBean.getCar();

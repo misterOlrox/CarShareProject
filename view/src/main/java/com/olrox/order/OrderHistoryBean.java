@@ -17,12 +17,12 @@ import java.util.List;
 @RequestScoped
 public class OrderHistoryBean {
     @EJB
-    CarOrdersManager carOrdersManager;
+    private CarOrdersManager carOrdersManager;
 
     @Inject
-    CurrentSessionBean currentSessionBean;
+    private CurrentSessionBean currentSessionBean;
 
-    List<CarOrder> orderHistory;
+    private List<CarOrder> orderHistory;
 
     @PostConstruct
     public void init(){

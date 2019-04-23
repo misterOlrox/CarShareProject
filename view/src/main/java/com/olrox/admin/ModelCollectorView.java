@@ -20,7 +20,7 @@ public class ModelCollectorView implements Serializable {
     private ModelsManager modelsManager;
 
     @Inject
-    ImageUploadBean imageUploadBean;
+    private ImageUploadBean imageUploadBean;
 
     private Model model;
 
