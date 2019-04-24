@@ -16,6 +16,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.Order;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -124,5 +125,11 @@ public class CarOrdersManager {
         Duration duration = Duration.between(start, finish);
         int minutes = (int) duration.toMinutes() + 1;
         return minutes * pricePerMinute;
+    }
+
+    public void makePayment(long orderId){
+        CarOrder order = find(orderId);
+        order.setOrderStatus(OrderStatus.CLOSED_PAID);
+        entityManager.merge(order);
     }
 }

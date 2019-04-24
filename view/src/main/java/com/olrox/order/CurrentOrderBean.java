@@ -69,6 +69,15 @@ public class CurrentOrderBean implements Serializable {
         }
     }
 
+    public boolean isRideOver(){
+        if(currentOrder==null){
+            return false;
+        }
+        else {
+            return currentOrder.getOrderStatus() == OrderStatus.RIDE_OVER;
+        }
+    }
+
     @PostConstruct
     public void init(){
         RentalUser user = currentSessionBean.getCurrentUser();

@@ -55,8 +55,12 @@
                                      update="messages"
                                      ajax="false"
                                      action="#{beepBean.beep}"
+                                     rendered="#{!currentOrderBean.rideOver}"
                     />
-                    <p:outputLabel for="beep" value="Your car will beep." style="font-weight:bold"/>
+                    <p:outputLabel for="beep"
+                                   value="Your car will beep."
+                                   style="font-weight:bold"
+                                   rendered="#{!currentOrderBean.rideOver}"/>
 
                     <p:commandButton id="unlock"
                                      value="Unlock"
@@ -70,6 +74,18 @@
                                    style="font-weight:bold"
                                    rendered="#{currentOrderBean.booking}"/>
 
+
+                    <p:commandButton id="pay"
+                                     value="Pay"
+                                     icon="pi pi-dollar"
+                                     update="messages"
+                                     ajax="true"
+                                     action="#{paymentBean.openPaymentDialog}"
+                                     rendered="#{currentOrderBean.rideOver}"/>
+                    <p:outputLabel for="pay"
+                                   value="Pay your order."
+                                   style="font-weight:bold"
+                                   rendered="#{currentOrderBean.rideOver}"/>
 
                     <p:commandButton id="finish"
                                      value="Finish"
@@ -113,9 +129,44 @@
                                      />
                 </a>
             </p:panel>
+
+            <p:dialog header="Payment" widgetVar="#{paymentBean.dlgVar}" minHeight="200" modal="true">
+
+                <p:dataTable  id="ordersPanel" var="order" value="#{currentOrderBean.currentOrder}">
+                    <p:column headerText="Order ID">
+                        <h:outputText value="#{order.id}" />
+                    </p:column>
+
+                    <p:column headerText="Booking at">
+                        <h:outputText value="#{order.bookingTime}" />
+                    </p:column>
+
+                    <p:column headerText="Start time">
+                        <h:outputText value="#{order.startTime}" />
+                    </p:column>
+
+                    <p:column headerText="End time">
+                        <h:outputText value="#{order.endTime}" />
+                    </p:column>
+
+                    <p:column headerText="Final score">
+                        <h:outputText value="#{order.finalScore}" />
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:outputText value="#{order.orderStatus}" />
+                    </p:column>
+                </p:dataTable>
+
+                <p:commandButton value="Proceed payment"
+                                 action="#{paymentBean.pay}"
+                                 style="margin-right: 20px;margin-top: 40px"
+                                 ajax="false"
+                />
+                <br/>
+            </p:dialog>
+
         </h:form>
-
-
     </ui:define>
 
 </ui:composition>
