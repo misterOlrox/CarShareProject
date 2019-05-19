@@ -1,9 +1,9 @@
 package com.olrox.admin;
 
-import com.olrox.car.domain.Car;
-import com.olrox.car.domain.Model;
-import com.olrox.car.ejb.CarsManager;
-import com.olrox.exception.DuplicateCarNumberException;
+import com.olrox.domain.car.Car;
+import com.olrox.domain.car.Model;
+import com.olrox.ejb.CarsManager;
+import com.olrox.ejb.exception.DuplicateCarNumberException;
 import com.olrox.map.MapView;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.map.LatLng;

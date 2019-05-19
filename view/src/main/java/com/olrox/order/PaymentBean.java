@@ -1,6 +1,6 @@
 package com.olrox.order;
 
-import com.olrox.order.ejb.CarOrdersManager;
+import com.olrox.ejb.CarOrdersManager;
 import org.primefaces.PrimeFaces;
 
 import javax.ejb.EJB;

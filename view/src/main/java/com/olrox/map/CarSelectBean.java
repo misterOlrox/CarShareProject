@@ -1,7 +1,7 @@
 package com.olrox.map;
 
-import com.olrox.car.domain.Car;
-import com.olrox.car.ejb.CarsManager;
+import com.olrox.domain.car.Car;
+import com.olrox.ejb.CarsManager;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.Marker;
 

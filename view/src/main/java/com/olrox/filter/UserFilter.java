@@ -1,7 +1,7 @@
 package com.olrox.filter;
 
 import com.olrox.account.CurrentSessionBean;
-import com.olrox.account.domain.Role;
+import com.olrox.domain.account.Role;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;

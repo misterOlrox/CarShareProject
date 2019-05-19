@@ -1,7 +1,7 @@
 package com.olrox.order;
 
 
-import com.olrox.carinteraction.CarBeeper;
+import com.olrox.ejb.carinteraction.CarBeeper;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;

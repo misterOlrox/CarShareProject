@@ -1,7 +1,7 @@
 package com.olrox.order;
 
-import com.olrox.carinteraction.CarUpdater;
-import com.olrox.order.ejb.CarOrdersManager;
+import com.olrox.ejb.carinteraction.CarUpdater;
+import com.olrox.ejb.CarOrdersManager;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;

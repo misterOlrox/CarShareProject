@@ -1,7 +1,7 @@
 package com.olrox.map;
 
 import com.olrox.admin.ModelCollectorView;
-import com.olrox.car.domain.Model;
+import com.olrox.domain.car.Model;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.SessionScoped;

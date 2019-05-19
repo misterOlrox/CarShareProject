@@ -1,14 +1,13 @@
 package com.olrox.order;
 
 import com.olrox.account.CurrentSessionBean;
-import com.olrox.account.domain.RentalUser;
-import com.olrox.account.ejb.RentalUsersManager;
-import com.olrox.car.domain.Car;
-import com.olrox.exception.CarAlreadyBookedException;
-import com.olrox.exception.TooManyActiveOrdersException;
-import com.olrox.exception.IllegalRoleException;
+import com.olrox.domain.account.RentalUser;
+import com.olrox.domain.car.Car;
+import com.olrox.ejb.exception.CarAlreadyBookedException;
+import com.olrox.ejb.exception.TooManyActiveOrdersException;
+import com.olrox.ejb.exception.IllegalRoleException;
 import com.olrox.map.CarSelectBean;
-import com.olrox.order.ejb.CarOrdersManager;
+import com.olrox.ejb.CarOrdersManager;
 import org.primefaces.PrimeFaces;
 
 import javax.ejb.EJB;
@@ -27,9 +26,6 @@ public class BookingBean implements Serializable {
 
     @EJB
     private CarOrdersManager carOrdersManager;
-
-    @EJB
-    private RentalUsersManager rentalUsersManager;
 
     @Inject
     private CarSelectBean carSelectBean;

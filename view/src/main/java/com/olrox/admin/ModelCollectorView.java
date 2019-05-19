@@ -1,7 +1,7 @@
 package com.olrox.admin;
 
-import com.olrox.car.domain.Model;
-import com.olrox.car.ejb.ModelsManager;
+import com.olrox.domain.car.Model;
+import com.olrox.ejb.ModelsManager;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

@@ -1,8 +1,8 @@
 package com.olrox.map;
 
-import com.olrox.car.domain.Car;
-import com.olrox.car.domain.CarStatus;
-import com.olrox.car.ejb.CarsManager;
+import com.olrox.domain.car.Car;
+import com.olrox.domain.car.CarStatus;
+import com.olrox.ejb.CarsManager;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;

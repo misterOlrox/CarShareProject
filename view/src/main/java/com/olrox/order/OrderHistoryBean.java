@@ -2,13 +2,12 @@ package com.olrox.order;
 
 
 import com.olrox.account.CurrentSessionBean;
-import com.olrox.order.domain.CarOrder;
-import com.olrox.order.ejb.CarOrdersManager;
+import com.olrox.domain.order.CarOrder;
+import com.olrox.ejb.CarOrdersManager;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;

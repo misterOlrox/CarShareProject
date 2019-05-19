@@ -1,10 +1,10 @@
 package com.olrox.account;
 
-import com.olrox.account.domain.Credentials;
-import com.olrox.account.domain.RentalUser;
-import com.olrox.account.domain.Role;
-import com.olrox.account.ejb.AuthorizationManager;
-import com.olrox.exception.DuplicateCredentialsLoginException;
+import com.olrox.domain.account.Credentials;
+import com.olrox.domain.account.RentalUser;
+import com.olrox.domain.account.Role;
+import com.olrox.ejb.AuthorizationManager;
+import com.olrox.ejb.exception.DuplicateCredentialsLoginException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

@@ -1,8 +1,8 @@
 package com.olrox.account;
 
-import com.olrox.account.domain.RentalUser;
-import com.olrox.account.domain.Role;
-import com.olrox.account.ejb.AuthorizationManager;
+import com.olrox.domain.account.RentalUser;
+import com.olrox.domain.account.Role;
+import com.olrox.ejb.AuthorizationManager;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.EJB;

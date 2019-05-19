@@ -1,12 +1,12 @@
 package com.olrox.order;
 
 import com.olrox.account.CurrentSessionBean;
-import com.olrox.account.domain.RentalUser;
-import com.olrox.car.domain.Car;
-import com.olrox.exception.TooManyActiveOrdersException;
-import com.olrox.order.domain.CarOrder;
-import com.olrox.order.domain.OrderStatus;
-import com.olrox.order.ejb.CarOrdersManager;
+import com.olrox.domain.account.RentalUser;
+import com.olrox.domain.car.Car;
+import com.olrox.ejb.exception.TooManyActiveOrdersException;
+import com.olrox.domain.order.CarOrder;
+import com.olrox.domain.order.OrderStatus;
+import com.olrox.ejb.CarOrdersManager;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
